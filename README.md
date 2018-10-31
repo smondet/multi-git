@@ -136,17 +136,17 @@ get consistent output w.r.t. users' configuration):
 
 ````````````````````````````````````````````````````````````````````````ok-output
     #=== /tmp/git-repos-example/hammerlab:=======================================
-    | Untrk | Modf | Ahd | Behd | Umrg |
+                                             | Untrk | Modf | Ahd | Behd | Umrg |
     GHub::biokepi........................... | 0     | 0    | 0   | 0    | 0    |
     GHub::coclobas.......................... | 0     | 0    | 0   | 0    | 0    |
     GHub::genspio........................... | 0     | 0    | 0   | 0    | 0    |
     GHub::ketrew............................ | 0     | 0    | 0   | 0    | 0    |
     #=== /tmp/git-repos-example/smondet:=========================================
-    | Untrk | Modf | Ahd | Behd | Umrg |
+                                             | Untrk | Modf | Ahd | Behd | Umrg |
     GLab::genspio-doc....................... | 0     | 0    | 0   | 0    | 0    |
     GLab::vecosek........................... | 0     | 0    | 0   | 0    | 0    |
     #=== /tmp/git-repos-example/tezos:===========================================
-    | Untrk | Modf | Ahd | Behd | Umrg |
+                                             | Untrk | Modf | Ahd | Behd | Umrg |
     GLab::tezos............................. | 0     | 0    | 0   | 0    | 0    |
 ````````````````````````````````````````````````````````````````````````
 
@@ -165,36 +165,37 @@ directly Markdown:
 > ##### GHub: genspio
 > 
 > ```
-> * ce0ea82 (origin/sm@improve-multigit-display) Improve display of multi-status table
+> * 95d94bb (origin/sm@improve-multigit-display) Fix README generation
+> * ce0ea82 Improve display of multi-status table
 > * 746c0ef Improve display of the activity report
 > * f499d0b Fix git alias in multigit documentation
 > * 241dbc0 Improve multi-status display
 > *   f28085d (HEAD -> master, origin/master, origin/HEAD) Merge `sm@multigit-readme` (PR #99)
-> |\
+> |\  
 > | * 417432a (origin/sm@multigit-readme) Add blob about limitations of activity-report
 > | * e7a76cb Fix typo in multi-git README
 > | * 2c9f192 Add example/demo to multi-git's `README.md`
 > | *   d26da12 Merge `master` into `sm@multigit-readme`
-> | |\
-> | |/
-> |/|
+> | |\  
+> | |/  
+> |/|   
 > * |   59ccac7 Merge `sm@add-activity-report` (PR #98, @smondet)
-> |\ \
+> |\ \  
 > | | * 0b6daf6 Add an example session
 > | | * 09f3fd4 Add `README.md` generation for mutli-git
-> | |/
+> | |/  
 > | * 5274995 (origin/sm@add-activity-report) Add more tests of `git-activity-report`
 > | * 33065aa Improve markdown output of `git-activity-report`
 > | * b3f9f43 Compute default `--since` to “Last Sunday”
 > | * c53b2fa Add `--section-base` to `git-activity_report`
 > | *   cbf5ce2 Merge `master` into `sm@add-activity-report`
-> | |\
-> | |/
-> |/|
+> | |\  
+> | |/  
+> |/|   
 > * |   5fc3628 Merge `sm@add-multigit-example` (PR #97)
-> |\ \
+> |\ \  
 > | | * 7d9b321 Add new multi-git script: `git-activity-report`
-> | |/
+> | |/  
 > | * 7308de2 (origin/sm@add-multigit-example) Add support for git-config and improve help
 > | * 5efe779 Add multigit to the literally documented examples
 > | * ecc5b24 Put descriptive comments in `git-multi-status`
@@ -205,7 +206,7 @@ directly Markdown:
 > | * 9e5061d Add `multigit` to TravisCI
 > | * b2c7416 Fix untracked count in `multi_status`
 > | * 04aabb7 Add the “Multi-git” example
-> |/
+> |/  
 > * 1e4e539 Trigger docker-build only in one travis-job
 > * 2023d27 Add docker-build trigger in Travis build
 > * b9d4b44 Tweak vm-tester documentation w.r.t Docker images
@@ -213,38 +214,38 @@ directly Markdown:
 > 
 > ###### On `master`
 > 
-> - Tweak vm-tester documentation w.r.t Docker images.
-> - Add docker-build trigger in Travis build.
-> - Trigger docker-build only in one travis-job.
+> - Tweak vm-tester documentation w.r.t Docker images.  
+> - Add docker-build trigger in Travis build.  
+> - Trigger docker-build only in one travis-job.  
 > (and fix it).
-> - Add the “Multi-git” example.
+> - Add the “Multi-git” example.  
 > For now there is a `git multi-status <paths>` command.
-> - Fix untracked count in `multi_status`.
-> - Add `multigit` to TravisCI.
-> - Put multigit test in separate script.
-> - Fix multi-status tests in OSX.
-> - Add option `--show-modified` (`git multi-status`).
-> - Display repository provider (`git multi-status`).
-> - Put descriptive comments in `git-multi-status`.
-> - Add multigit to the literally documented examples.
-> - Add support for git-config and improve help.
-> - Add new multi-git script: `git-activity-report`.
+> - Fix untracked count in `multi_status`.  
+> - Add `multigit` to TravisCI.  
+> - Put multigit test in separate script.  
+> - Fix multi-status tests in OSX.  
+> - Add option `--show-modified` (`git multi-status`).  
+> - Display repository provider (`git multi-status`).  
+> - Put descriptive comments in `git-multi-status`.  
+> - Add multigit to the literally documented examples.  
+> - Add support for git-config and improve help.  
+> - Add new multi-git script: `git-activity-report`.  
 > - This is still work in progress.
 > - The tests do not verify much yet either.
-> - Merge `sm@add-multigit-example` (PR #97).
-> - Merge `master` into `sm@add-activity-report`.
-> - Add `--section-base` to `git-activity_report`.
-> - Compute default `--since` to “Last Sunday”.
-> - Improve markdown output of `git-activity-report`.
-> - Add more tests of `git-activity-report`.
-> - Add `README.md` generation for mutli-git.
-> - Add an example session.
-> - Merge `sm@add-activity-report` (PR #98, @smondet).
-> - Merge `master` into `sm@multigit-readme`.
-> - Add example/demo to multi-git's `README.md`.
-> - Fix typo in multi-git README.
-> - Add blob about limitations of activity-report.
-> - Merge `sm@multigit-readme` (PR #99).
+> - Merge `sm@add-multigit-example` (PR #97).  
+> - Merge `master` into `sm@add-activity-report`.  
+> - Add `--section-base` to `git-activity_report`.  
+> - Compute default `--since` to “Last Sunday”.  
+> - Improve markdown output of `git-activity-report`.  
+> - Add more tests of `git-activity-report`.  
+> - Add `README.md` generation for mutli-git.  
+> - Add an example session.  
+> - Merge `sm@add-activity-report` (PR #98, @smondet).  
+> - Merge `master` into `sm@multigit-readme`.  
+> - Add example/demo to multi-git's `README.md`.  
+> - Fix typo in multi-git README.  
+> - Add blob about limitations of activity-report.  
+> - Merge `sm@multigit-readme` (PR #99).  
 > 
 > #### In `/tmp/git-repos-example/smondet`
 > 
@@ -256,57 +257,63 @@ directly Markdown:
 > 
 > ###### On `master`
 > 
-> - Update `.gitlab-ci.yml` (missing in `fb3bbbd`).
+> - Update `.gitlab-ci.yml` (missing in `fb3bbbd`).  
 > 
 > #### In `/tmp/git-repos-example/tezos`
 > 
 > ##### GLab: tezos
 > 
 > ```
-> * 64cc18ab (origin/galfour/benchmark) Benchmark: unify benchmark methods
-> * fad716fe Benchmark: use c stub instead of Core's timing function
-> * dc211808 Benchmark: hand-made regression benchmarks
-> | * 39a77121 (origin/plaforgue/p2p_discovery) Documentation and refactoring
-> | * 3844071c Local peer discovery
-> | | * 32f96ffa (origin/philb/trusted_peers) P2P: updated test_p2p_pool
-> | | * 0652b819 P2p: refactor maintenance
-> | | * fe1b2a90 P2P: launch maintenance if not enough trusted peers
-> | | * b3e0f57e P2p: sync doc
-> | | * 72dd52d6 P2p: extract independent functions from big let rec
-> | | * 2b7897dc add obj11/tup11 encoding
-> | | | * 23bfa7d9 (origin/quyen/test_michelson_types) change name of functions test
-> | | | * 73e058de failwith
-> | | | * be3d23d1 test_0 added
-> | | | * 7db399e7 todo in control structures
-> | | | * 70893afc add comments
-> | | | * e7ab960c add list map
-> | | | * d961c109 solve some TODOs case
-> | | | * f8329c64 test_2
-> | | | * 540b0983  nothing
-> | | | * 7dd7ed8c test on list
-> | | | * b03b892e Todo cases
-> | | | * a641d763 organise the codes test base on the documentation
-> | | | * c52c69ef organise the codes test base on the documentation
-> | | | * 6f8813d9 add specific operations and organise the codes base on the documentation
-> | | | * 4b918fb9 nothing
-> | | | * 7b616186 operations on maps
-> | | | * 42d0bbed test on operations on sets
-> | | | * 20962686 (origin/abate/mempool-worker) Mempool: add parse and validate functions
-> | | | * 81771470 Mempool: add global workers
-> | | |/
-> | |/|
-> | | | * 32199cb5 (origin/vb/raft) Raft: WIP
-> | | | * 628a3b45 Signer: prepare for Raft consensus signing
-> | | | * f054af26 Signer: refactoring
-> | | | | * 93a612af (origin/victor/apply_refacto) Shell/validator: code refactoring to allow standalone block validation
+> * 8e640159 (origin/victor-proto_process) Update structure (WIP)
+> * ebc448fb lib_shell: add fork validator (WIP)
+> * 873f47a1 Update machinery to comiple the node_validator
+> * b5b8ae0d Shell: remove state from apply block arg an reorganize code
+> | * 64cc18ab (origin/galfour/benchmark) Benchmark: unify benchmark methods
+> | * fad716fe Benchmark: use c stub instead of Core's timing function
+> | * dc211808 Benchmark: hand-made regression benchmarks
+> | | * 39a77121 (origin/plaforgue/p2p_discovery) Documentation and refactoring
+> | | * 3844071c Local peer discovery
+> | | | * 32f96ffa (origin/philb/trusted_peers) P2P: updated test_p2p_pool
+> | | | * 0652b819 P2p: refactor maintenance
+> | | | * fe1b2a90 P2P: launch maintenance if not enough trusted peers
+> | | | * b3e0f57e P2p: sync doc
+> | | | * 72dd52d6 P2p: extract independent functions from big let rec
+> | | | * 2b7897dc add obj11/tup11 encoding
+> | | | | * 23bfa7d9 (origin/quyen/test_michelson_types) change name of functions test
+> | | | | * 73e058de failwith
+> | | | | * be3d23d1 test_0 added
+> | | | | * 7db399e7 todo in control structures
+> | | | | * 70893afc add comments
+> | | | | * e7ab960c add list map
+> | | | | * d961c109 solve some TODOs case
+> | | | | * f8329c64 test_2
+> | | | | * 540b0983  nothing
+> | | | | * 7dd7ed8c test on list
+> | | | | * b03b892e Todo cases
+> | | | | * a641d763 organise the codes test base on the documentation
+> | | | | * c52c69ef organise the codes test base on the documentation
+> | | | | * 6f8813d9 add specific operations and organise the codes base on the documentation
+> | | | | * 4b918fb9 nothing
+> | | | | * 7b616186 operations on maps
+> | | | | * 42d0bbed test on operations on sets
+> | | | | * 20962686 (origin/abate/mempool-worker) Mempool: add parse and validate functions
+> | | | | * 81771470 Mempool: add global workers
+> | | | |/  
+> | | |/|   
+> | | | | * 32199cb5 (origin/vb/raft) Raft: WIP
+> | | | | * 628a3b45 Signer: prepare for Raft consensus signing
+> | | | | * f054af26 Signer: refactoring
+> | | | | | * 93a612af (origin/victor/apply_refacto) Shell/validator: code refactoring to allow standalone block validation
+> | |_|_|_|/  
+> |/| | | |   
 > | | | | | * 2ab271f8 (origin/galfour/benchmark-custom) better benchmarks
 > | | | | | * 2eff57e4 packaging
 > | | | | | * 009f7b5f interweaved benchmarks
 > | | | | | * f9726be2 proof of concept
-> | |_|_|_|/
-> |/| | | |
-> * | | | | 63989b7c Benchmark: cleanup parsing (removes re dependency)
-> * | | | | 3290cb92 Benchmark: fix tests on every bench
+> | | |_|_|/  
+> | |/| | |   
+> | * | | | 63989b7c Benchmark: cleanup parsing (removes re dependency)
+> | * | | | 3290cb92 Benchmark: fix tests on every bench
 > | | | | | * f734dc9f (origin/reorg_michelson_test_contracts) fix prev test
 > | | | | | * 4976d3d5 test
 > | | | | | * e03529b4 test2
@@ -326,15 +333,13 @@ directly Markdown:
 > | | | | | * 8e6cd9f2 Tests: split Michelson tests into category mini_scenarios
 > | | | | | * 77b5cd89 Tests: split Michelson tests into category macros
 > | | | | | * 002d5a2e Tests: split Michelson tests into category opcode
-> | | | | |/
-> | | | |/|
+> | | | | |/  
 > | | | | | * 70356814 (origin/mb/pending_requests) Shell/Distributed_db: avoid requesting peers with zombie requests
 > | | | | | * cf4722da Shell/Distributed_db: distinguish late pending fulfilled (zombie) requests from unrequested answers
-> | | | | |/
-> | | | |/|
+> | | | | |/  
 > | | | | | * 8ced40b3 (origin/philb/receipt_command) Alpha client: added 'get receipt' command
-> | | | |_|/
-> | | |/| |
+> | | | | |/  
+> | | | |/|   
 > | | | | | * 310117bf (origin/vb/crypto-lock-and-wipe) XXX
 > | | | | | * eebd8603 [signer backend]: fix lock problem with sk_of_bytes
 > | | | | | * 78bdb4f4 [signer backend]: use with_wipe_lock_result in decrypt function
@@ -353,25 +358,24 @@ directly Markdown:
 > | | | | | * 4bc0c2a5 Crypto: implement `wipe` and `lock`
 > | | | | | * f81d3f0c Error_monad: add `finalize`
 > | | | | | * bf75fc8e Crypto/HACL: add `wipe` and `lock` primitives
-> | | |_|_|/
-> | |/| | |
+> | | | |_|/  
+> | | |/| |   
 > | | | | | * 79a863ef (origin/mb/distributed_db_delay) Shell/Distributed_db: make initial request delay depend on resource kind
-> | | | | |/
-> | | | |/|
-> | | | * | fa2a9e0d (HEAD -> master, origin/master, origin/HEAD) doc: add support page
-> | | |/ /
-> | |/| |
+> | | | | |/  
+> | | | | * fa2a9e0d (HEAD -> master, origin/master, origin/HEAD) doc: add support page
+> | | | |/  
+> | | |/|   
 > | | | | * 26b5bbff (origin/galfour/benchmark-landmarks) skepticism
-> | |_|_|/
-> |/| | |
-> * | | | aebb66e4 Affine model for SEQ
-> * | | | 970b5080 Unwrapped calibration tests
-> * | | | 42a3d9a7 closure extended
-> * | | | cbc9e3c5 More log
-> * | | | e202d028 Benchmark: disable stabilize_gc flag - too much overhead
-> * | | | af8d3ef8 Bench/Proto: export step instead of interp_generic, removes some overheads
-> * | | | 377d94f3 Benchmark: prefix calibration benches's result to the other benches instead of computing everything again
-> * | | | 8a2378e2 Benchmarks: translated old calibration benchs to the new form
+> | | |_|/  
+> | |/| |   
+> | * | | aebb66e4 Affine model for SEQ
+> | * | | 970b5080 Unwrapped calibration tests
+> | * | | 42a3d9a7 closure extended
+> | * | | cbc9e3c5 More log
+> | * | | e202d028 Benchmark: disable stabilize_gc flag - too much overhead
+> | * | | af8d3ef8 Bench/Proto: export step instead of interp_generic, removes some overheads
+> | * | | 377d94f3 Benchmark: prefix calibration benches's result to the other benches instead of computing everything again
+> | * | | 8a2378e2 Benchmarks: translated old calibration benchs to the new form
 > | | | | * 1de1bf1f (origin/julien/Nack-with-list-of-peer_rewritten) lib_p2p: attaching list of points to Nack
 > | | | | * 21f14d0f lib_p2p/p2p_pool: misc debug messages
 > | | | | * 90a98974 test_p2p_pool: Comments
@@ -383,13 +387,13 @@ directly Markdown:
 > | | | | * 6217d1ee lib_stdlib/option Adding a pretty printer for option types
 > | | | | * 97ceb239 Exporting the `equal` fonction of Point.Id
 > | | | | * 70bc11c2 lib_p2p/test Adding comment to explain wait_all behaviour
-> | | |_|/
-> | |/| |
+> | | | |/  
+> | | |/|   
 > | | | | * b0ccf33c (origin/philb/demo_protocol) Update proto_demo
 > | | | | * e534e82a CI: update opam-repository branch
 > | | | | * 8f5cd015 Shell: remove dead code
-> | | |_|/
-> | |/| |
+> | | | |/  
+> | | |/|   
 > | | | | * 3f251373 (origin/eztz/signer-deterministic_nonce) signer: added deterministic_nonce
 > | | | | | * 9894361f (origin/julien/Nack-with-list-of-peer) p2p: indentation
 > | | | | | * 9a8a3179 test_p2p_pool: restauring former tests
@@ -410,68 +414,63 @@ directly Markdown:
 > | | | | | * 247ace4b Note: reorganisation and complement
 > | | | | | * c0059e18 Note: connection description
 > | | | | | * 90554edf Personnal documentation file to follow the flow of incomming connections
-> | | |_|_|/
-> | |/| | |
-> | | | | | * ebc448fb (origin/victor-proto_process) lib_shell: add fork validator (WIP)
-> | | | | | * 873f47a1 Update machinery to comiple the node_validator
-> | | | | | * b5b8ae0d Shell: remove state from apply block arg an reorganize code
-> | | | | |/
-> | | | |/|
+> | | | |_|/  
+> | | |/| |   
 > | | | | | * 6b45dc08 (origin/abate/prevalidator-rpc-functor) Prevalidator: add RPC error in case of unknown protocol
 > | | | | | * 0b28588c Prevalidation: remove now useless protocol_data encoding/decoding
 > | | | | | * 8dea2773 Prevalidation: remove lazy computation for rpc directory
-> | | | | |/
+> | | | | |/  
 > | | | | | * 99563a41 (origin/abate/error_monad_docstring) Error Monad: add docstring to register_error_kind
-> | | | | |/
+> | | | | |/  
 > | | | | | * 80460c77 (origin/identity_backward_compat) bin_node: sanity check on node identity file
 > | | | | | * 128b5ef4 lib_crypto:  Adding pretty printer for public keys
 > | | | | | * 1417981a lib_crypto: export neuterize and public_key equality
 > | | | | | * 85f64afc Fix bc37fde73eb4a1df3783822256433881e1c0bf59 : Restore compatibily with (old) identity.json that does not contain a `peer_id`
-> | | |_|_|/
-> | |/| | |
+> | | | |_|/  
+> | | |/| |   
 > | | | | | * 8ba122c9 (origin/michelson_test_contracts) Client: sort Michelson test contracts
-> | | |_|_|/
-> | |/| | |
-> | * | | | 14b1ba2a Stdlib/Ring: fix ring's semantics
+> | | | |_|/  
+> | | |/| |   
+> | | * | | 14b1ba2a Stdlib/Ring: fix ring's semantics
 > | | | | | * 5708131b (origin/galfour/benchmark-dirty) dirty test
-> | |_|_|_|/
-> |/| | | |
-> * | | | | e7cb7d9a added constant run overhead
-> * | | | | 69311ea5 add calibration to tests
-> * | | | | 5d3dd36c Benchmark: unify the workflow in executable
-> * | | | | 153541ba Benchmark: fix indent
-> * | | | | 94be1c78 write_lp: addition fix
-> * | | | | f56493ff Benchmark: reworked directory hierarchy
-> * | | | | d0f1f592 empty trace case added
-> * | | | | 7a6ebacb wtf
-> * | | | | cd88283c generic benchmarks
-> * | | | | d0e36c25 indentation
-> * | | | | 81708e9e Generic interp
-> * | | | | 017eb9c8 TMP:start clean-up
-> * | | | | e807d0aa Bench: moved cp to run.sh
-> * | | | | a2ad9d25 cleaning
-> * | | | | 93109917 Packaging
-> * | | | | 4c73688e better benchmarks
-> * | | | | 548f978b all weights, bugfixes, minor improvements
-> * | | | | 3973a504 it works
-> * | | | | d623f116 save
-> * | | | | d2321323 refactoring
-> * | | | | 370f4572 refactoring
-> * | | | | 1356aedc last basic contract, start refactoring and debugging
-> * | | | | 54a05119 save
-> * | | | | 5daa0e40 save
-> * | | | | 1bb2432b bug
-> * | | | | 51f84269 benchmark for force_decode
-> * | | | | acf8c92d folder architecture
-> | |_|_|/
-> |/| | |
+> | | |_|_|/  
+> | |/| | |   
+> | * | | | e7cb7d9a added constant run overhead
+> | * | | | 69311ea5 add calibration to tests
+> | * | | | 5d3dd36c Benchmark: unify the workflow in executable
+> | * | | | 153541ba Benchmark: fix indent
+> | * | | | 94be1c78 write_lp: addition fix
+> | * | | | f56493ff Benchmark: reworked directory hierarchy
+> | * | | | d0f1f592 empty trace case added
+> | * | | | 7a6ebacb wtf
+> | * | | | cd88283c generic benchmarks
+> | * | | | d0e36c25 indentation
+> | * | | | 81708e9e Generic interp
+> | * | | | 017eb9c8 TMP:start clean-up
+> | * | | | e807d0aa Bench: moved cp to run.sh
+> | * | | | a2ad9d25 cleaning
+> | * | | | 93109917 Packaging
+> | * | | | 4c73688e better benchmarks
+> | * | | | 548f978b all weights, bugfixes, minor improvements
+> | * | | | 3973a504 it works
+> | * | | | d623f116 save
+> | * | | | d2321323 refactoring
+> | * | | | 370f4572 refactoring
+> | * | | | 1356aedc last basic contract, start refactoring and debugging
+> | * | | | 54a05119 save
+> | * | | | 5daa0e40 save
+> | * | | | 1bb2432b bug
+> | * | | | 51f84269 benchmark for force_decode
+> | * | | | acf8c92d folder architecture
+> | | |_|/  
+> | |/| |   
 > | | | | * 7de447d3 (origin/plaforgue/annotation_assert) Add annotations for inspecting values with ASSERT_SOME, ASSERT_LEFT, ASSERT_RIGHT
 > | | | | * fa7c9997 Alpha, client: unexpand macros when displaying scripts
-> | | |_|/
-> | |/| |
-> | * | | f898062f Signer: add `handler.mli`
-> | * | | 203c212b Micheline: fix printer for code that exceeds 80 columns
-> |/ / /
+> | | | |/  
+> | | |/|   
+> | | * | f898062f Signer: add `handler.mli`
+> | | * | 203c212b Micheline: fix printer for code that exceeds 80 columns
+> | |/ /  
 > | | | * 995f67a8 (origin/state_migration) Shell: fix minor typo in error name
 > | | | * 0b7fcc80 Shell: fix indentation
 > | | | * 5b23f6f9 Shell: use "atomic" upgrade of disk storage
@@ -480,8 +479,8 @@ directly Markdown:
 > | | | * c788d8f2 Node: prepare for storage upgrades
 > | | | * 919c34cf Shell: use private type for `State.Block.Header.t`
 > | | | * 8f436206 Shell/RPC: export a Base58Check representation of block headers
-> | |_|/
-> |/| |
+> | | |/  
+> | |/|   
 > | | | * b1343b4e (origin/abate/prevalidator-preapply-refactor) Prevalidator: advertisement -> pending_advertisement
 > | | | * a2f4fea3 Prevalidator: add a couple of comments in the code
 > | | | * a6b59f53 Prevalidator: refactor preapply
@@ -495,18 +494,17 @@ directly Markdown:
 > | | | * cf3980c8 Prevalidation: add parse_list to parse a list of operations
 > | | | * cbe3e8b4 Prevalidation: minor preapply refactor
 > | | | * 886b9b85 Prevalidator: Remove mempool from the worker state
-> | |_|/
-> |/| |
-> * | | 03922847 Shell/Peer_metadata: change counters to aribtrary precision integers
-> * | | 9d34bd6f RPC: minor changes and add genesis+N
-> * | | 60a6b762 RPC: add a hash+N and a hash-N notations
-> * | | 2352a783 RPC: add a way to access a given block using its level
-> * | | bb698359 Shell: fix notification of new operations in the mempool
-> | |/
-> |/|
+> | | |/  
+> | |/|   
+> | * | 03922847 Shell/Peer_metadata: change counters to aribtrary precision integers
+> | * | 9d34bd6f RPC: minor changes and add genesis+N
+> | * | 60a6b762 RPC: add a hash+N and a hash-N notations
+> | * | 2352a783 RPC: add a way to access a given block using its level
+> | * | bb698359 Shell: fix notification of new operations in the mempool
+> |/ /  
 > * | 1272b11e Shell: first batch of statistics in the DistributedDB
 > * | ee640c86 Shell: Extract the block-application function into a separate module
-> |/
+> |/  
 > | * 2be8be73 (origin/quick-mempool-fix) Stdlib/Ring: fix ring's semantics
 > | * c38e0614 Mempool: quick limits fix
 > | * 6fb3812e (origin/julien/kick-wth-lst-of-peer) lib_p2p/test Adding a test for the "kick with list of pairs" functionality
@@ -520,11 +518,11 @@ directly Markdown:
 > | * 80f203b7 (origin/galfour/benchmark-wtf) wtf
 > | * fdd26204 generic benchmarks
 > | *   acbbbbea Merge branch 'galfour/benchmark' of gitlab.com:tezos/tezos into galfour/benchmark
-> | |\
+> | |\  
 > | | * 67861b0c TMP:start clean-up
 > | * | 38fe6f3c indentation
 > | * | 2617b0c1 Generic interp
-> | |/
+> | |/  
 > | * cb22be0d Bench: moved cp to run.sh
 > | * 805c5ddd cleaning
 > | * 68bbf56a Packaging
@@ -540,33 +538,33 @@ directly Markdown:
 > | * 3db5ab1f bug
 > | * 1f1138c6 benchmark for force_decode
 > | * a644ac88 folder architecture
-> |/
+> |/  
 > | * 15dd35b0 (origin/raphael/prototype-batch-scheduler) PROTOTYPE: batch scheduler
-> |/
+> |/  
 > * 7cbfcfa6 Shell: simplify the signature of `Prevalidation`
 > * 02bc43b0 Target only USB ledger with interface number 0
 > ```
 > 
 > ###### On `master`
 > 
-> - Target only USB ledger with interface number 0.
-> - Shell: simplify the signature of `Prevalidation`.
+> - Target only USB ledger with interface number 0.  
+> - Shell: simplify the signature of `Prevalidation`.  
 > Co-authored-by: Raphaël Proust <code@bnwr.net>
 > Co-authored-by: Pietro Abate <pietro.abate@tezcore.com>
 > Co-authored-by: Grégoire Henry <gregoire@tezcore.com>
-> - Shell: Extract the block-application function into a separate module.
-> - Shell: first batch of statistics in the DistributedDB.
+> - Shell: Extract the block-application function into a separate module.  
+> - Shell: first batch of statistics in the DistributedDB.  
 > Co-authored-by: Pietro Abate <pietro.abate@tezcore.com>
 > Co-authored-by: Mathias Bourgoin <mathias.bourgoin@tezcore.com>
-> - Shell: fix notification of new operations in the mempool.
-> - RPC: add a way to access a given block using its level.
-> - RPC: add a hash+N and a hash-N notations.
-> - RPC: minor changes and add genesis+N.
-> - Shell/Peer_metadata: change counters to aribtrary precision integers.
-> - Micheline: fix printer for code that exceeds 80 columns.
-> - Signer: add `handler.mli`.
-> - Stdlib/Ring: fix ring's semantics.
-> - doc: add support page.
+> - Shell: fix notification of new operations in the mempool.  
+> - RPC: add a way to access a given block using its level.  
+> - RPC: add a hash+N and a hash-N notations.  
+> - RPC: minor changes and add genesis+N.  
+> - Shell/Peer_metadata: change counters to aribtrary precision integers.  
+> - Micheline: fix printer for code that exceeds 80 columns.  
+> - Signer: add `handler.mli`.  
+> - Stdlib/Ring: fix ring's semantics.  
+> - doc: add support page.  
 
 
 Let's do some modifications:
@@ -593,8 +591,8 @@ Let's do some modifications:
       greatness to the README'
 
 ````````````````````````````````````````````````````````````````````````ok-output
-    [new-branch-for-the-example cf1aa9f] Add greatness to the README
-    1 file changed, 1 insertion(+)
+    [new-branch-for-the-example de76a74] Add greatness to the README
+     1 file changed, 1 insertion(+)
 ````````````````````````````````````````````````````````````````````````
 
 
@@ -609,22 +607,22 @@ creating, it has a remote to define it):
 
 ````````````````````````````````````````````````````````````````````````ok-output
     #=== /tmp/git-repos-example/hammerlab:=======================================
-    | Untrk | Modf | Ahd | Behd | Umrg |
+                                             | Untrk | Modf | Ahd | Behd | Umrg |
     GHub::biokepi........................... | 0     | 2    | 0   | 0    | 0    |
-    |- Modified:
-    |    - LICENSE
-    |    - README.md
+      |- Modified:
+      |    - LICENSE
+      |    - README.md
     GHub::coclobas.......................... | 1     | 1    | 0   | 0    | 0    |
-    |- Modified:
-    |    - README.md
+      |- Modified:
+      |    - README.md
     GHub::genspio........................... | 0     | 0    | 0   | 0    | 0    |
     GHub::ketrew............................ | 0     | 0    | 1   | 0    | 0    |
     #=== /tmp/git-repos-example/smondet:=========================================
-    | Untrk | Modf | Ahd | Behd | Umrg |
+                                             | Untrk | Modf | Ahd | Behd | Umrg |
     GLab::genspio-doc....................... | 0     | 0    | 0   | 0    | 0    |
     GLab::vecosek........................... | 0     | 0    | 0   | 0    | 0    |
     #=== /tmp/git-repos-example/tezos:===========================================
-    | Untrk | Modf | Ahd | Behd | Umrg |
+                                             | Untrk | Modf | Ahd | Behd | Umrg |
     GLab::tezos............................. | 0     | 0    | 0   | 0    | 0    |
 ````````````````````````````````````````````````````````````````````````
 
@@ -643,23 +641,24 @@ Let's concentrate the activity-report on
     #### GHub: genspio
     
     ```
-    * ce0ea82 (origin/sm@improve-multigit-display) Improve display of multi-status table
+    * 95d94bb (origin/sm@improve-multigit-display) Fix README generation
+    * ce0ea82 Improve display of multi-status table
     * 746c0ef Improve display of the activity report
     * f499d0b Fix git alias in multigit documentation
     * 241dbc0 Improve multi-status display
     *   f28085d (HEAD -> master, origin/master, origin/HEAD) Merge `sm@multigit-readme` (PR #99)
-    |\
+    |\  
     | * 417432a (origin/sm@multigit-readme) Add blob about limitations of activity-report
     | * e7a76cb Fix typo in multi-git README
     | * 2c9f192 Add example/demo to multi-git's `README.md`
     | *   d26da12 Merge `master` into `sm@multigit-readme`
-    | |\
-    | |/
-    |/|
+    | |\  
+    | |/  
+    |/|   
     * | 59ccac7 Merge `sm@add-activity-report` (PR #98, @smondet)
     | * 0b6daf6 Add an example session
     | * 09f3fd4 Add `README.md` generation for mutli-git
-    |/
+    |/  
     * 5274995 (origin/sm@add-activity-report) Add more tests of `git-activity-report`
     * 33065aa Improve markdown output of `git-activity-report`
     * b3f9f43 Compute default `--since` to “Last Sunday”
@@ -668,23 +667,23 @@ Let's concentrate the activity-report on
     
     ##### On `master`
     
-    - Add `--section-base` to `git-activity_report`.
-    - Compute default `--since` to “Last Sunday”.
-    - Improve markdown output of `git-activity-report`.
-    - Add more tests of `git-activity-report`.
-    - Add `README.md` generation for mutli-git.
-    - Add an example session.
-    - Merge `sm@add-activity-report` (PR #98, @smondet).
-    - Merge `master` into `sm@multigit-readme`.
-    - Add example/demo to multi-git's `README.md`.
-    - Fix typo in multi-git README.
-    - Add blob about limitations of activity-report.
-    - Merge `sm@multigit-readme` (PR #99).
+    - Add `--section-base` to `git-activity_report`.  
+    - Compute default `--since` to “Last Sunday”.  
+    - Improve markdown output of `git-activity-report`.  
+    - Add more tests of `git-activity-report`.  
+    - Add `README.md` generation for mutli-git.  
+    - Add an example session.  
+    - Merge `sm@add-activity-report` (PR #98, @smondet).  
+    - Merge `master` into `sm@multigit-readme`.  
+    - Add example/demo to multi-git's `README.md`.  
+    - Fix typo in multi-git README.  
+    - Add blob about limitations of activity-report.  
+    - Merge `sm@multigit-readme` (PR #99).  
     
     #### GHub: ketrew
     
     ```
-    * cf1aa9f (HEAD -> new-branch-for-the-example) Add greatness to the README
+    * de76a74 (HEAD -> new-branch-for-the-example) Add greatness to the README
     ```
     
     ##### On `master`
@@ -692,7 +691,7 @@ Let's concentrate the activity-report on
     
     ##### On `new-branch-for-the-example`
     
-    - Add greatness to the README.
+    - Add greatness to the README.  
 ````````````````````````````````````````````````````````````````````````
 
 
