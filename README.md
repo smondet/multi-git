@@ -734,7 +734,7 @@ Let's do some modifications:
       greatness to the README'
 
 ````````````````````````````````````````````````````````````````````````ok-output
-    [new-branch-for-the-example 8792c65] Add greatness to the README
+    [new-branch-for-the-example a6413cc] Add greatness to the README
      1 file changed, 1 insertion(+)
 ````````````````````````````````````````````````````````````````````````
 
