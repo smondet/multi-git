@@ -26,10 +26,6 @@ See below for detailed usage information ⮷.
 Usage: Git-multi-status
 -----------------------
 
-See `git-multi-status --help`:
-
-```
-usage: git-multi-status <args>
 Show the status of a bunch of Git repositories.
 
 Use `git multi-status /path/to/repos1 /path/to/repos2` to display
@@ -42,21 +38,27 @@ Default paths to explore can be set in Git's configuration:
     git config --global --add multi-git.paths /path/to/repos2
 
 
+The table shows 5 columns:
+
+* `Untrk`-> Untracked files.
+* `Modf` -> Modified files.
+* `Ahd`  -> Branches ahead of their remote.
+* `Behd` -> Branches behind on their remote.
+* `Umrg` -> Branches not merged in `HEAD`.
+
 Options:
 
 * `--show-modified`: Show the list of modified files.
 * `--no-config`: Do not look at the `multi-git.paths` git-config option.
 * `--version`: Show version information.
 * `--describe`: Show the status of a bunch of Git repositories
-```
+
+
+See also `git-multi-status --help`.
 
 Usage: Git-activity-report
 --------------------------
 
-See `git-activity-report --help`:
-
-```
-usage: git-activity-report <args>
 Make a report of developments in a bunch of Git repositories.
 
 Use `git activity-report --since 2018-10-23 /path/to/repos1 /path/to/repos2` to display
@@ -74,9 +76,12 @@ Options:
 * `--no-config`: Do not look at the `multi-git.paths` git-config option.
 * `--since <string>`: Date to get the logs/information since (default: “last sunday”).
 * `--section-base <string>`: The base markdown section ('##', '###', etc. default: ###)
+* `--fetch`: Run `git fetch --all` before showing a repository.
 * `--version`: Show version information.
 * `--describe`: Make a report of developments in a bunch of Git repositories
-```
+
+
+See also `git-activity-report --help`.
 
 **Current Limitations:**
 
@@ -133,17 +138,17 @@ get consistent output w.r.t. users' configuration):
 ````````````````````````````````````````````````````````````````````````ok-output
     #=== /tmp/git-repos-example/hammerlab:=======================================
                                              | Untrk | Modf | Ahd | Behd | Umrg |
-    GHub::biokepi........................... | 0     | 0    | 0   | 0    | 0    |
-    GHub::coclobas.......................... | 0     | 0    | 0   | 0    | 0    |
-    GHub::genspio........................... | 0     | 0    | 0   | 0    | 0    |
-    GHub::ketrew............................ | 0     | 0    | 0   | 0    | 0    |
+    GHub::biokepi............................| 0     | 0    | 0   | 0    | 0    |
+    GHub::coclobas...........................| 0     | 0    | 0   | 0    | 0    |
+    GHub::genspio............................| 0     | 0    | 0   | 0    | 0    |
+    GHub::ketrew.............................| 0     | 0    | 0   | 0    | 0    |
     #=== /tmp/git-repos-example/smondet:=========================================
                                              | Untrk | Modf | Ahd | Behd | Umrg |
-    GLab::genspio-doc....................... | 0     | 0    | 0   | 0    | 0    |
-    GLab::vecosek........................... | 0     | 0    | 0   | 0    | 0    |
+    GLab::genspio-doc........................| 0     | 0    | 0   | 0    | 0    |
+    GLab::vecosek............................| 0     | 0    | 0   | 0    | 0    |
     #=== /tmp/git-repos-example/tezos:===========================================
                                              | Untrk | Modf | Ahd | Behd | Umrg |
-    GLab::tezos............................. | 0     | 0    | 0   | 0    | 0    |
+    GLab::tezos..............................| 0     | 0    | 0   | 0    | 0    |
 ````````````````````````````````````````````````````````````````````````
 
 
@@ -170,7 +175,10 @@ directly Markdown:
 > Graph:
 > 
 > ````````````````````````````````````````````````````````````````````````````````
-> *  (origin/sm@improve-multigit-display) Fix README generation
+> *  (origin/sm@improve-multigit-display) Update multigit tests
+> *  Add option `--fetch` to `git-activity-report`
+> *  Improve display of activity-report
+> *  Fix README generation
 > *  Improve display of multi-status table
 > *  Improve display of the activity report
 > *  Fix git alias in multigit documentation
@@ -369,87 +377,95 @@ directly Markdown:
 > Graph:
 > 
 > ````````````````````````````````````````````````````````````````````````````````
-> *  (origin/victor-proto_process) Update structure (WIP)
-> *  lib_shell: add fork validator (WIP)
-> *  Update machinery to comiple the node_validator
-> *  Shell: remove state from apply block arg an reorganize code
-> | *  (origin/galfour/benchmark) Benchmark: unify benchmark methods
-> | *  Benchmark: use c stub instead of Core's timing function
-> | *  Benchmark: hand-made regression benchmarks
-> | | *  (origin/plaforgue/p2p_discovery) Documentation and refactoring
-> | | *  Local peer discovery
-> | | | *  (origin/philb/trusted_peers) P2P: updated test_p2p_pool
-> | | | *  P2p: refactor maintenance
-> | | | *  P2P: launch maintenance if not enough trusted peers
-> | | | *  P2p: sync doc
-> | | | *  P2p: extract independent functions from big let rec
-> | | | *  add obj11/tup11 encoding
-> | | | | *  (origin/quyen/test_michelson_types) change name of functions test
-> | | | | *  failwith
-> | | | | *  test_0 added
-> | | | | *  todo in control structures
-> | | | | *  add comments
-> | | | | *  add list map
-> | | | | *  solve some TODOs case
-> | | | | *  test_2
-> | | | | *   nothing
-> | | | | *  test on list
-> | | | | *  Todo cases
-> | | | | *  organise the codes test base on the documentation
-> | | | | *  organise the codes test base on the documentation
-> | | | | *  add specific operations and organise the codes base on the
-> | | | | |   documentation
-> | | | | *  nothing
-> | | | | *  operations on maps
-> | | | | *  test on operations on sets
-> | | | | *  (origin/abate/mempool-worker) Mempool: add parse and validate functions
-> | | | | *  Mempool: add global workers
-> | | | |/  
-> | | |/|   
-> | | | | *  (origin/vb/raft) Raft: WIP
-> | | | | *  Signer: prepare for Raft consensus signing
-> | | | | *  Signer: refactoring
-> | | | | | *  (origin/victor/apply_refacto) Shell/validator: code refactoring to
-> | |_|_|_|/    allow standalone block validation
+> *  (origin/reorg_michelson_test_contracts) tentative fix
+> *  fix prev test
+> *  test
+> *  test2
+> *  test
+> *  Client: : fix the fail on gitlab (3rd trial)
+> *  Client: fix the fail on gitlab (2nd trial)
+> *  Client: fix the fail on gitlab (trial)
+> *  Client: reorg Michelson contracts + update bash scripts
+> *  Revert "Client/Michelson test contracts: fix references to 'contracts'
+> |   directory"
+> *  Client/Michelson test contracts: fix references to 'contracts'
+> |   directory
+> *  Client: reorg Michelson test contracts and bash scripts
+> |   (mini_scenarios, pt2)
+> *  Client: reorg Michelson test contracts and bash scripts (macros, pt2)
+> *  Client: reorg Michelson test contracts and bash scripts (opcode, pt2)
+> *  Client: reorg Michelson test contracts and bash scripts (attic, pt2)
+> *  Tests: reorganise Michelson tests
+> *  Tests: split Michelson tests into category attic
+> *  Tests: split Michelson tests into category mini_scenarios
+> *  Tests: split Michelson tests into category macros
+> *  Tests: split Michelson tests into category opcode
+> | *  (origin/alternative_head_change_heuristic) Shell: less optimistic
+> | |   heuristic for head change
+> | *  Shell: export fitness of the current mempool
+> |/  
+> | *  (origin/vb/remote-signer-chains) Signer: add other remote signers
+> |/  
+> | *  (origin/philb/trusted_peers) P2P: enforce min num of
+> | |   trusted_connections
+> | *  P2p: sync doc
+> | *  P2p: extract independent functions from big let rec
+> | *  add obj11/tup11 encoding
+> | | *  (origin/abate/mempool-worker) Mempool: add worker's handlers
+> | | *  Mempool: add parse and validate functions
+> | | *  Mempool: add global workers
+> | | | *  (origin/victor-proto_process) Update structure (WIP)
+> | | | *  lib_shell: add fork validator (WIP)
+> | | | *  Update machinery to comiple the node_validator
+> | | | *  Shell: remove state from apply block arg an reorganize code
+> | | | | *  (origin/galfour/benchmark) Benchmark: unify benchmark methods
+> | | | | *  Benchmark: use c stub instead of Core's timing function
+> | | | | *  Benchmark: hand-made regression benchmarks
+> | | | | | *  (origin/plaforgue/p2p_discovery) Documentation and refactoring
+> | | | | | *  Local peer discovery
+> | | | |_|/  
+> | | |/| |   
+> | | | | | *  (origin/quyen/test_michelson_types) change name of functions test
+> | | | | | *  failwith
+> | | | | | *  test_0 added
+> | | | | | *  todo in control structures
+> | | | | | *  add comments
+> | | | | | *  add list map
+> | | | | | *  solve some TODOs case
+> | | | | | *  test_2
+> | | | | | *   nothing
+> | | | | | *  test on list
+> | | | | | *  Todo cases
+> | | | | | *  organise the codes test base on the documentation
+> | | | | | *  organise the codes test base on the documentation
+> | | | | | *  add specific operations and organise the codes base on the
+> | | | | | |   documentation
+> | | | | | *  nothing
+> | | | | | *  operations on maps
+> | | | | | *  test on operations on sets
+> | | | | | *  (origin/vb/raft) Raft: WIP
+> | | | | | *  Signer: prepare for Raft consensus signing
+> | | | | | *  Signer: refactoring
+> | |_|_|_|/  
 > |/| | | |   
+> | | | | | *  (origin/victor/apply_refacto) Shell/validator: code refactoring to
+> | | | | |/    allow standalone block validation
+> | | | |/|   
 > | | | | | *  (origin/galfour/benchmark-custom) better benchmarks
 > | | | | | *  packaging
 > | | | | | *  interweaved benchmarks
 > | | | | | *  proof of concept
-> | | |_|_|/  
-> | |/| | |   
-> | * | | |  Benchmark: cleanup parsing (removes re dependency)
-> | * | | |  Benchmark: fix tests on every bench
-> | | | | | *  (origin/reorg_michelson_test_contracts) fix prev test
-> | | | | | *  test
-> | | | | | *  test2
-> | | | | | *  test
-> | | | | | *  Client: : fix the fail on gitlab (3rd trial)
-> | | | | | *  Client: fix the fail on gitlab (2nd trial)
-> | | | | | *  Client: fix the fail on gitlab (trial)
-> | | | | | *  Client: reorg Michelson contracts + update bash scripts
-> | | | | | *  Revert "Client/Michelson test contracts: fix references to 'contracts'
-> | | | | | |   directory"
-> | | | | | *  Client/Michelson test contracts: fix references to 'contracts'
-> | | | | | |   directory
-> | | | | | *  Client: reorg Michelson test contracts and bash scripts
-> | | | | | |   (mini_scenarios, pt2)
-> | | | | | *  Client: reorg Michelson test contracts and bash scripts (macros, pt2)
-> | | | | | *  Client: reorg Michelson test contracts and bash scripts (opcode, pt2)
-> | | | | | *  Client: reorg Michelson test contracts and bash scripts (attic, pt2)
-> | | | | | *  Tests: reorganise Michelson tests
-> | | | | | *  Tests: split Michelson tests into category attic
-> | | | | | *  Tests: split Michelson tests into category mini_scenarios
-> | | | | | *  Tests: split Michelson tests into category macros
-> | | | | | *  Tests: split Michelson tests into category opcode
 > | | | | |/  
+> | | | | *  Benchmark: cleanup parsing (removes re dependency)
+> | | | | *  Benchmark: fix tests on every bench
 > | | | | | *  (origin/mb/pending_requests) Shell/Distributed_db: avoid requesting
 > | | | | | |   peers with zombie requests
 > | | | | | *  Shell/Distributed_db: distinguish late pending fulfilled (zombie)
-> | | | | |/    requests from unrequested answers
+> | |_|_|_|/    requests from unrequested answers
+> |/| | | |   
 > | | | | | *  (origin/philb/receipt_command) Alpha client: added 'get receipt'
-> | | | | |/    command
-> | | | |/|   
+> | | |_|_|/    command
+> | |/| | |   
 > | | | | | *  (origin/vb/crypto-lock-and-wipe) XXX
 > | | | | | *  [signer backend]: fix lock problem with sk_of_bytes
 > | | | | | *  [signer backend]: use with_wipe_lock_result in decrypt function
@@ -473,23 +489,23 @@ directly Markdown:
 > | | | |_|/  
 > | | |/| |   
 > | | | | | *  (origin/mb/distributed_db_delay) Shell/Distributed_db: make initial
-> | | | | |/    request delay depend on resource kind
-> | | | | *  (HEAD -> master, origin/master, origin/HEAD) doc: add support page
-> | | | |/  
-> | | |/|   
+> | |_|_|_|/    request delay depend on resource kind
+> |/| | | |   
+> * | | | |  (HEAD -> master, origin/master, origin/HEAD) doc: add support page
+> | |/ / /  
+> |/| | |   
 > | | | | *  (origin/galfour/benchmark-landmarks) skepticism
-> | | |_|/  
-> | |/| |   
-> | * | |  Affine model for SEQ
-> | * | |  Unwrapped calibration tests
-> | * | |  closure extended
-> | * | |  More log
-> | * | |  Benchmark: disable stabilize_gc flag - too much overhead
-> | * | |  Bench/Proto: export step instead of interp_generic, removes some
+> | | | |/  
+> | | | *  Affine model for SEQ
+> | | | *  Unwrapped calibration tests
+> | | | *  closure extended
+> | | | *  More log
+> | | | *  Benchmark: disable stabilize_gc flag - too much overhead
+> | | | *  Bench/Proto: export step instead of interp_generic, removes some
 > | | | |   overheads
-> | * | |  Benchmark: prefix calibration benches's result to the other benches
+> | | | *  Benchmark: prefix calibration benches's result to the other benches
 > | | | |   instead of computing everything again
-> | * | |  Benchmarks: translated old calibration benchs to the new form
+> | | | *  Benchmarks: translated old calibration benchs to the new form
 > | | | | *  (origin/julien/Nack-with-list-of-peer_rewritten) lib_p2p: attaching
 > | | | | |   list of points to Nack
 > | | | | *  lib_p2p/p2p_pool: misc debug messages
@@ -502,13 +518,13 @@ directly Markdown:
 > | | | | *  lib_stdlib/option Adding a pretty printer for option types
 > | | | | *  Exporting the `equal` fonction of Point.Id
 > | | | | *  lib_p2p/test Adding comment to explain wait_all behaviour
-> | | | |/  
-> | | |/|   
+> | |_|_|/  
+> |/| | |   
 > | | | | *  (origin/philb/demo_protocol) Update proto_demo
 > | | | | *  CI: update opam-repository branch
 > | | | | *  Shell: remove dead code
-> | | | |/  
-> | | |/|   
+> | |_|_|/  
+> |/| | |   
 > | | | | *  (origin/eztz/signer-deterministic_nonce) signer: added
 > | | | | |   deterministic_nonce
 > | | | | | *  (origin/julien/Nack-with-list-of-peer) p2p: indentation
@@ -532,8 +548,8 @@ directly Markdown:
 > | | | | | *  Note: reorganisation and complement
 > | | | | | *  Note: connection description
 > | | | | | *  Personnal documentation file to follow the flow of incomming
-> | | | |_|/    connections
-> | | |/| |   
+> | |_|_|_|/    connections
+> |/| | | |   
 > | | | | | *  (origin/abate/prevalidator-rpc-functor) Prevalidator: add RPC error in
 > | | | | | |   case of unknown protocol
 > | | | | | *  Prevalidation: remove now useless protocol_data encoding/decoding
@@ -546,52 +562,52 @@ directly Markdown:
 > | | | | | *  lib_crypto:  Adding pretty printer for public keys
 > | | | | | *  lib_crypto: export neuterize and public_key equality
 > | | | | | *  Fix bc37fde73eb4a1df3783822256433881e1c0bf59 : Restore compatibily with
-> | | | |_|/    (old) identity.json that does not contain a `peer_id`
-> | | |/| |   
+> | |_|_|_|/    (old) identity.json that does not contain a `peer_id`
+> |/| | | |   
 > | | | | | *  (origin/michelson_test_contracts) Client: sort Michelson test contracts
-> | | | |_|/  
-> | | |/| |   
-> | | * | |  Stdlib/Ring: fix ring's semantics
+> | |_|_|_|/  
+> |/| | | |   
+> * | | | |  Stdlib/Ring: fix ring's semantics
 > | | | | | *  (origin/galfour/benchmark-dirty) dirty test
-> | | |_|_|/  
-> | |/| | |   
-> | * | | |  added constant run overhead
-> | * | | |  add calibration to tests
-> | * | | |  Benchmark: unify the workflow in executable
-> | * | | |  Benchmark: fix indent
-> | * | | |  write_lp: addition fix
-> | * | | |  Benchmark: reworked directory hierarchy
-> | * | | |  empty trace case added
-> | * | | |  wtf
-> | * | | |  generic benchmarks
-> | * | | |  indentation
-> | * | | |  Generic interp
-> | * | | |  TMP:start clean-up
-> | * | | |  Bench: moved cp to run.sh
-> | * | | |  cleaning
-> | * | | |  Packaging
-> | * | | |  better benchmarks
-> | * | | |  all weights, bugfixes, minor improvements
-> | * | | |  it works
-> | * | | |  save
-> | * | | |  refactoring
-> | * | | |  refactoring
-> | * | | |  last basic contract, start refactoring and debugging
-> | * | | |  save
-> | * | | |  save
-> | * | | |  bug
-> | * | | |  benchmark for force_decode
-> | * | | |  folder architecture
-> | | |_|/  
-> | |/| |   
+> | | | | |/  
+> | | | |/|   
+> | | | * |  added constant run overhead
+> | | | * |  add calibration to tests
+> | | | * |  Benchmark: unify the workflow in executable
+> | | | * |  Benchmark: fix indent
+> | | | * |  write_lp: addition fix
+> | | | * |  Benchmark: reworked directory hierarchy
+> | | | * |  empty trace case added
+> | | | * |  wtf
+> | | | * |  generic benchmarks
+> | | | * |  indentation
+> | | | * |  Generic interp
+> | | | * |  TMP:start clean-up
+> | | | * |  Bench: moved cp to run.sh
+> | | | * |  cleaning
+> | | | * |  Packaging
+> | | | * |  better benchmarks
+> | | | * |  all weights, bugfixes, minor improvements
+> | | | * |  it works
+> | | | * |  save
+> | | | * |  refactoring
+> | | | * |  refactoring
+> | | | * |  last basic contract, start refactoring and debugging
+> | | | * |  save
+> | | | * |  save
+> | | | * |  bug
+> | | | * |  benchmark for force_decode
+> | | | * |  folder architecture
+> | | | |/  
 > | | | | *  (origin/plaforgue/annotation_assert) Add annotations for inspecting
 > | | | | |   values with ASSERT_SOME, ASSERT_LEFT, ASSERT_RIGHT
 > | | | | *  Alpha, client: unexpand macros when displaying scripts
-> | | | |/  
-> | | |/|   
-> | | * |  Signer: add `handler.mli`
-> | | * |  Micheline: fix printer for code that exceeds 80 columns
-> | |/ /  
+> | |_|_|/  
+> |/| | |   
+> * | | |  Signer: add `handler.mli`
+> * | | |  Micheline: fix printer for code that exceeds 80 columns
+> | |_|/  
+> |/| |   
 > | | | *  (origin/state_migration) Shell: fix minor typo in error name
 > | | | *  Shell: fix indentation
 > | | | *  Shell: use "atomic" upgrade of disk storage
@@ -600,8 +616,8 @@ directly Markdown:
 > | | | *  Node: prepare for storage upgrades
 > | | | *  Shell: use private type for `State.Block.Header.t`
 > | | | *  Shell/RPC: export a Base58Check representation of block headers
-> | | |/  
-> | |/|   
+> | |_|/  
+> |/| |   
 > | | | *  (origin/abate/prevalidator-preapply-refactor) Prevalidator:
 > | | | |   advertisement -> pending_advertisement
 > | | | *  Prevalidator: add a couple of comments in the code
@@ -617,14 +633,15 @@ directly Markdown:
 > | | | *  Prevalidation: add parse_list to parse a list of operations
 > | | | *  Prevalidation: minor preapply refactor
 > | | | *  Prevalidator: Remove mempool from the worker state
-> | | |/  
-> | |/|   
-> | * |  Shell/Peer_metadata: change counters to aribtrary precision integers
-> | * |  RPC: minor changes and add genesis+N
-> | * |  RPC: add a hash+N and a hash-N notations
-> | * |  RPC: add a way to access a given block using its level
-> | * |  Shell: fix notification of new operations in the mempool
-> |/ /  
+> | |_|/  
+> |/| |   
+> * | |  Shell/Peer_metadata: change counters to aribtrary precision integers
+> * | |  RPC: minor changes and add genesis+N
+> * | |  RPC: add a hash+N and a hash-N notations
+> * | |  RPC: add a way to access a given block using its level
+> * | |  Shell: fix notification of new operations in the mempool
+> | |/  
+> |/|   
 > * |  Shell: first batch of statistics in the DistributedDB
 > * |  Shell: Extract the block-application function into a separate module
 > |/  
@@ -717,7 +734,7 @@ Let's do some modifications:
       greatness to the README'
 
 ````````````````````````````````````````````````````````````````````````ok-output
-    [new-branch-for-the-example df47040] Add greatness to the README
+    [new-branch-for-the-example 8792c65] Add greatness to the README
      1 file changed, 1 insertion(+)
 ````````````````````````````````````````````````````````````````````````
 
@@ -734,22 +751,22 @@ creating, it has a remote to define it):
 ````````````````````````````````````````````````````````````````````````ok-output
     #=== /tmp/git-repos-example/hammerlab:=======================================
                                              | Untrk | Modf | Ahd | Behd | Umrg |
-    GHub::biokepi........................... | 0     | 2    | 0   | 0    | 0    |
+    GHub::biokepi............................| 0     | 2    | 0   | 0    | 0    |
       |- Modified:
       |    - LICENSE
       |    - README.md
-    GHub::coclobas.......................... | 1     | 1    | 0   | 0    | 0    |
+    GHub::coclobas...........................| 1     | 1    | 0   | 0    | 0    |
       |- Modified:
       |    - README.md
-    GHub::genspio........................... | 0     | 0    | 0   | 0    | 0    |
-    GHub::ketrew............................ | 0     | 0    | 1   | 0    | 0    |
+    GHub::genspio............................| 0     | 0    | 0   | 0    | 0    |
+    GHub::ketrew.............................| 0     | 0    | 1   | 0    | 0    |
     #=== /tmp/git-repos-example/smondet:=========================================
                                              | Untrk | Modf | Ahd | Behd | Umrg |
-    GLab::genspio-doc....................... | 0     | 0    | 0   | 0    | 0    |
-    GLab::vecosek........................... | 0     | 0    | 0   | 0    | 0    |
+    GLab::genspio-doc........................| 0     | 0    | 0   | 0    | 0    |
+    GLab::vecosek............................| 0     | 0    | 0   | 0    | 0    |
     #=== /tmp/git-repos-example/tezos:===========================================
                                              | Untrk | Modf | Ahd | Behd | Umrg |
-    GLab::tezos............................. | 0     | 0    | 0   | 0    | 0    |
+    GLab::tezos..............................| 0     | 0    | 0   | 0    | 0    |
 ````````````````````````````````````````````````````````````````````````
 
 
@@ -776,7 +793,10 @@ Let's concentrate the activity-report on
     Graph:
     
     ````````````````````````````````````````````````````````````````````````````````
-    *  (origin/sm@improve-multigit-display) Fix README generation
+    *  (origin/sm@improve-multigit-display) Update multigit tests
+    *  Add option `--fetch` to `git-activity-report`
+    *  Improve display of activity-report
+    *  Fix README generation
     *  Improve display of multi-status table
     *  Improve display of the activity report
     *  Fix git alias in multigit documentation
@@ -796,16 +816,10 @@ Let's concentrate the activity-report on
     | *  Add `README.md` generation for mutli-git
     |/  
     *  (origin/sm@add-activity-report) Add more tests of `git-activity-report`
-    *  Improve markdown output of `git-activity-report`
-    *  Compute default `--since` to “Last Sunday”
-    *  Add `--section-base` to `git-activity_report`
     ````````````````````````````````````````````````````````````````````````````````
     
     ##### On `HEAD -> master, origin/master, origin/HEAD`
     
-    - Add `--section-base` to `git-activity_report`.  
-    - Compute default `--since` to “Last Sunday”.  
-    - Improve markdown output of `git-activity-report`.  
     - Add more tests of `git-activity-report`.  
     - Add `README.md` generation for mutli-git.  
     - Add an example session.  
@@ -818,9 +832,6 @@ Let's concentrate the activity-report on
     
     ##### On `origin/sm@multigit-readme`
     
-    - Add `--section-base` to `git-activity_report`.  
-    - Compute default `--since` to “Last Sunday”.  
-    - Improve markdown output of `git-activity-report`.  
     - Add more tests of `git-activity-report`.  
     - Add `README.md` generation for mutli-git.  
     - Add an example session.  
@@ -832,9 +843,6 @@ Let's concentrate the activity-report on
     
     ##### On `origin/sm@add-activity-report`
     
-    - Add `--section-base` to `git-activity_report`.  
-    - Compute default `--since` to “Last Sunday”.  
-    - Improve markdown output of `git-activity-report`.  
     - Add more tests of `git-activity-report`.  
     
     #### GHub: ketrew
