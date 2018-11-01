@@ -40,11 +40,11 @@ Default paths to explore can be set in Git's configuration:
 
 The table shows 5 columns:
 
-* `Untrk`-> Untracked files.
-* `Modf` -> Modified files.
-* `Ahd`  -> Branches ahead of their remote.
-* `Behd` -> Branches behind on their remote.
-* `Umrg` -> Branches not merged in `HEAD`.
+* `Untrk`→ Untracked files.
+* `Modf` → Modified files.
+* `Ahd`  → Branches ahead of their remote.
+* `Behd` → Branches behind on their remote.
+* `Umrg` → Branches not merged in `HEAD`.
 
 Options:
 
@@ -734,7 +734,7 @@ Let's do some modifications:
       greatness to the README'
 
 ````````````````````````````````````````````````````````````````````````ok-output
-    [new-branch-for-the-example a6413cc] Add greatness to the README
+    [new-branch-for-the-example 1582957] Add greatness to the README
      1 file changed, 1 insertion(+)
 ````````````````````````````````````````````````````````````````````````
 
