@@ -17,7 +17,7 @@ It may be interesting for the user to also alias them in
 
 
     [alias]
-        mst = multi-status --show-modified
+        mst = multi-status --show-all-extras
         arfd = activity-report --since
 
 
@@ -38,17 +38,22 @@ Default paths to explore can be set in Git's configuration:
     git config --global --add multi-git.paths /path/to/repos2
 
 
-The table shows 5 columns:
+The table shows 7 columns:
 
 * `Untrk`→ Untracked files.
 * `Modf` → Modified files.
 * `Ahd`  → Branches ahead of their remote.
-* `Behd` → Branches behind on their remote.
-* `Umrg` → Branches not merged in `HEAD`.
+* `Bhd`  → Branches behind on their remote.
+* `Umr`  → Branches not merged in `HEAD`.
+* `Lcl`  → Not-remote-tracking local branches.
+* `L/H`  → Not-remote-tracking local branches not merged in `HEAD`.
 
 Options:
 
 * `--show-modified`: Show the list of modified files.
+* `--show-ahead`: Show the list of ahead branches.
+* `--show-local`: Show the list of local branches.
+* `--show-all-extras`: Like all the `--show-*` options together.
 * `--no-config`: Do not look at the `multi-git.paths` git-config option.
 * `--version`: Show version information.
 * `--describe`: Show the status of a bunch of Git repositories
@@ -136,19 +141,19 @@ get consistent output w.r.t. users' configuration):
       /tmp/git-repos-example/smondet /tmp/git-repos-example/tezos
 
 ````````````````````````````````````````````````````````````````````````ok-output
-    #=== /tmp/git-repos-example/hammerlab:=======================================
-                                             | Untrk | Modf | Ahd | Behd | Umrg |
-    GHub::biokepi............................| 0     | 0    | 0   | 0    | 0    |
-    GHub::coclobas...........................| 0     | 0    | 0   | 0    | 0    |
-    GHub::genspio............................| 0     | 0    | 0   | 0    | 0    |
-    GHub::ketrew.............................| 0     | 0    | 0   | 0    | 0    |
-    #=== /tmp/git-repos-example/smondet:=========================================
-                                             | Untrk | Modf | Ahd | Behd | Umrg |
-    GLab::genspio-doc........................| 0     | 0    | 0   | 0    | 0    |
-    GLab::vecosek............................| 0     | 0    | 0   | 0    | 0    |
-    #=== /tmp/git-repos-example/tezos:===========================================
-                                             | Untrk | Modf | Ahd | Behd | Umrg |
-    GLab::tezos..............................| 0     | 0    | 0   | 0    | 0    |
+    #=== /tmp/git-repos-example/hammerlab:================================================
+                                             | Untrk | Modf | Ahd | Bhd | Umr | Lcl | L/H |
+    GHub::biokepi............................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
+    GHub::coclobas...........................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
+    GHub::genspio............................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
+    GHub::ketrew.............................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
+    #=== /tmp/git-repos-example/smondet:==================================================
+                                             | Untrk | Modf | Ahd | Bhd | Umr | Lcl | L/H |
+    GLab::genspio-doc........................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
+    GLab::vecosek............................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
+    #=== /tmp/git-repos-example/tezos:====================================================
+                                             | Untrk | Modf | Ahd | Bhd | Umr | Lcl | L/H |
+    GLab::tezos..............................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
 ````````````````````````````````````````````````````````````````````````
 
 
@@ -175,7 +180,12 @@ directly Markdown:
 > Graph:
 > 
 > ````````````````````````````````````````````````````````````````````````````````
-> *  (origin/sm@improve-multigit-display) Update multigit tests
+> *  (origin/sm@improve-multigit-display) Fix both multigit scripts for
+> |   relative paths
+> *  Fix multi-status display on OSX
+> *  Improve `README.md` generation
+> *  Add help-message about multi-status columns
+> *  Update multigit tests
 > *  Add option `--fetch` to `git-activity-report`
 > *  Improve display of activity-report
 > *  Fix README generation
@@ -377,92 +387,112 @@ directly Markdown:
 > Graph:
 > 
 > ````````````````````````````````````````````````````````````````````````````````
-> *  (origin/reorg_michelson_test_contracts) tentative fix
-> *  fix prev test
-> *  test
-> *  test2
-> *  test
-> *  Client: : fix the fail on gitlab (3rd trial)
-> *  Client: fix the fail on gitlab (2nd trial)
-> *  Client: fix the fail on gitlab (trial)
-> *  Client: reorg Michelson contracts + update bash scripts
-> *  Revert "Client/Michelson test contracts: fix references to 'contracts'
-> |   directory"
-> *  Client/Michelson test contracts: fix references to 'contracts'
-> |   directory
-> *  Client: reorg Michelson test contracts and bash scripts
-> |   (mini_scenarios, pt2)
-> *  Client: reorg Michelson test contracts and bash scripts (macros, pt2)
-> *  Client: reorg Michelson test contracts and bash scripts (opcode, pt2)
-> *  Client: reorg Michelson test contracts and bash scripts (attic, pt2)
-> *  Tests: reorganise Michelson tests
-> *  Tests: split Michelson tests into category attic
-> *  Tests: split Michelson tests into category mini_scenarios
-> *  Tests: split Michelson tests into category macros
-> *  Tests: split Michelson tests into category opcode
-> | *  (origin/alternative_head_change_heuristic) Shell: less optimistic
-> | |   heuristic for head change
-> | *  Shell: export fitness of the current mempool
-> |/  
-> | *  (origin/vb/remote-signer-chains) Signer: add other remote signers
+> *  (origin/quyen/test_michelson_types) add test for iter set
+> *  change name of functions test
+> *  failwith
+> *  test_0 added
+> *  todo in control structures
+> *  add comments
+> *  add list map
+> *  solve some TODOs case
+> *  test_2
+> *   nothing
+> *  test on list
+> *  Todo cases
+> *  organise the codes test base on the documentation
+> *  organise the codes test base on the documentation
+> *  add specific operations and organise the codes base on the
+> |   documentation
+> *  nothing
+> *  operations on maps
+> *  test on operations on sets
+> *  (origin/partial_master) Adding prune and delete functions to
+> |   State.Block
+> *  Shell: block_directory of missing hashes raises Not_found
+> *  Shell: Block_directory rpc handles missing blocks
+> *  Shell: Change Chain_traversal.live_blocks type to allow failing
+> | *  (origin/abate/mempool-worker) Mempool: fix indent
+> | *  Mempool: add is_valid function
+> | *  Mempool: add on_request function
+> | *  Mempool: add worker's handlers
+> | *  Mempool: add parse and validate functions
+> | *  Mempool: add global workers
 > |/  
 > | *  (origin/philb/trusted_peers) P2P: enforce min num of
 > | |   trusted_connections
 > | *  P2p: sync doc
 > | *  P2p: extract independent functions from big let rec
 > | *  add obj11/tup11 encoding
-> | | *  (origin/abate/mempool-worker) Mempool: add worker's handlers
-> | | *  Mempool: add parse and validate functions
-> | | *  Mempool: add global workers
-> | | | *  (origin/victor-proto_process) Update structure (WIP)
-> | | | *  lib_shell: add fork validator (WIP)
-> | | | *  Update machinery to comiple the node_validator
-> | | | *  Shell: remove state from apply block arg an reorganize code
-> | | | | *  (origin/galfour/benchmark) Benchmark: unify benchmark methods
-> | | | | *  Benchmark: use c stub instead of Core's timing function
-> | | | | *  Benchmark: hand-made regression benchmarks
-> | | | | | *  (origin/plaforgue/p2p_discovery) Documentation and refactoring
-> | | | | | *  Local peer discovery
-> | | | |_|/  
-> | | |/| |   
-> | | | | | *  (origin/quyen/test_michelson_types) change name of functions test
-> | | | | | *  failwith
-> | | | | | *  test_0 added
-> | | | | | *  todo in control structures
-> | | | | | *  add comments
-> | | | | | *  add list map
-> | | | | | *  solve some TODOs case
-> | | | | | *  test_2
-> | | | | | *   nothing
-> | | | | | *  test on list
-> | | | | | *  Todo cases
-> | | | | | *  organise the codes test base on the documentation
-> | | | | | *  organise the codes test base on the documentation
-> | | | | | *  add specific operations and organise the codes base on the
-> | | | | | |   documentation
-> | | | | | *  nothing
-> | | | | | *  operations on maps
-> | | | | | *  test on operations on sets
-> | | | | | *  (origin/vb/raft) Raft: WIP
-> | | | | | *  Signer: prepare for Raft consensus signing
-> | | | | | *  Signer: refactoring
-> | |_|_|_|/  
-> |/| | | |   
+> | | *  (origin/mb/pending_requests) Shell/Distributed_db: try to avoid
+> | | |   requesting peers with pending requests
+> | | *  Shell/Distributed_db: distinguish late pending fulfilled (zombie)
+> | |/    requests from unrequested ones
+> |/|   
+> | | *  (origin/vb/remote-signer-chains) Signer: remove socket on all more
+> | | |   termination signals
+> | | *  Signer: add other remote signers
+> | |/  
+> |/|   
+> | | *  (origin/vb/raft) Signer: remove socket on all more termination signals
+> | | *  Raft: add logging
+> | | *  Raft: WIP
+> | | *  Signer: prepare for Raft consensus signing
+> | | *  Signer: refactoring
+> | |/  
+> |/|   
+> | | *  (origin/quyen/test_michelson) Client: reorg Michelson contracts +
+> | | |   update bash scripts
+> | | *  Client: reorg Michelson test contracts and bash scripts
+> | | |   (mini_scenarios, pt2)
+> | | *  Client: reorg Michelson test contracts and bash scripts (macros, pt2)
+> | | *  Client: reorg Michelson test contracts and bash scripts (opcode, pt2)
+> | | *  Client: reorg Michelson test contracts and bash scripts (attic, pt2)
+> | | *  Tests: reorganise Michelson tests
+> | | *  Tests: split Michelson tests into category attic
+> | | *  Tests: split Michelson tests into category mini_scenarios
+> | | *  Tests: split Michelson tests into category macros
+> | | *  Tests: split Michelson tests into category opcode
+> | |/  
+> |/|   
+> | | *  (origin/reorg_michelson_test_contracts) Client: reorg Michelson
+> | | |   contracts + update bash scripts
+> | | *  Client: reorg Michelson test contracts and bash scripts
+> | | |   (mini_scenarios, pt2)
+> | | *  Client: reorg Michelson test contracts and bash scripts (macros, pt2)
+> | | *  Client: reorg Michelson test contracts and bash scripts (opcode, pt2)
+> | | *  Client: reorg Michelson test contracts and bash scripts (attic, pt2)
+> | | *  Tests: reorganise Michelson tests
+> | | *  Tests: split Michelson tests into category attic
+> | | *  Tests: split Michelson tests into category mini_scenarios
+> | | *  Tests: split Michelson tests into category macros
+> | | *  Tests: split Michelson tests into category opcode
+> | |/  
+> |/|   
+> | | *  (origin/alternative_head_change_heuristic) Shell: less optimistic
+> | | |   heuristic for head change
+> | | *  Shell: export fitness of the current mempool
+> | |/  
+> |/|   
+> | | *  (origin/victor-proto_process) Update structure (WIP)
+> | | *  lib_shell: add fork validator (WIP)
+> | | *  Update machinery to comiple the node_validator
+> | | *  Shell: remove state from apply block arg an reorganize code
+> | | | *  (origin/galfour/benchmark) Benchmark: unify benchmark methods
+> | | | *  Benchmark: use c stub instead of Core's timing function
+> | | | *  Benchmark: hand-made regression benchmarks
+> | | | | *  (origin/plaforgue/p2p_discovery) Documentation and refactoring
+> | | | | *  Local peer discovery
 > | | | | | *  (origin/victor/apply_refacto) Shell/validator: code refactoring to
-> | | | | |/    allow standalone block validation
-> | | | |/|   
+> | | | |_|/    allow standalone block validation
+> | | |/| |   
 > | | | | | *  (origin/galfour/benchmark-custom) better benchmarks
 > | | | | | *  packaging
 > | | | | | *  interweaved benchmarks
 > | | | | | *  proof of concept
 > | | | | |/  
-> | | | | *  Benchmark: cleanup parsing (removes re dependency)
-> | | | | *  Benchmark: fix tests on every bench
-> | | | | | *  (origin/mb/pending_requests) Shell/Distributed_db: avoid requesting
-> | | | | | |   peers with zombie requests
-> | | | | | *  Shell/Distributed_db: distinguish late pending fulfilled (zombie)
-> | |_|_|_|/    requests from unrequested answers
-> |/| | | |   
+> | | | |/|   
+> | | | * |  Benchmark: cleanup parsing (removes re dependency)
+> | | | * |  Benchmark: fix tests on every bench
 > | | | | | *  (origin/philb/receipt_command) Alpha client: added 'get receipt'
 > | | |_|_|/    command
 > | |/| | |   
@@ -486,13 +516,12 @@ directly Markdown:
 > | | | | | *  Crypto: implement `wipe` and `lock`
 > | | | | | *  Error_monad: add `finalize`
 > | | | | | *  Crypto/HACL: add `wipe` and `lock` primitives
-> | | | |_|/  
-> | | |/| |   
+> | | | | |/  
 > | | | | | *  (origin/mb/distributed_db_delay) Shell/Distributed_db: make initial
 > | |_|_|_|/    request delay depend on resource kind
 > |/| | | |   
 > * | | | |  (HEAD -> master, origin/master, origin/HEAD) doc: add support page
-> | |/ / /  
+> | |_|_|/  
 > |/| | |   
 > | | | | *  (origin/galfour/benchmark-landmarks) skepticism
 > | | | |/  
@@ -723,50 +752,54 @@ Let's do some modifications:
     $ echo 'This is Great' >> \
       /tmp/git-repos-example/hammerlab/ketrew/README.md
     $ git -C /tmp/git-repos-example/hammerlab/ketrew/ checkout -b \
-      new-branch-for-the-example -t master
+      new-branch-that-tracks -t master
 
 ````````````````````````````````````````````````````````````````````````ok-output
     M	README.md
-    Branch 'new-branch-for-the-example' set up to track local branch 'master'.
+    Branch 'new-branch-that-tracks' set up to track local branch 'master'.
 ````````````````````````````````````````````````````````````````````````
 
     $ git -C /tmp/git-repos-example/hammerlab/ketrew/ commit -a -m 'Add \
       greatness to the README'
 
 ````````````````````````````````````````````````````````````````````````ok-output
-    [new-branch-for-the-example 1582957] Add greatness to the README
+    [new-branch-that-tracks 25f2c47] Add greatness to the README
      1 file changed, 1 insertion(+)
 ````````````````````````````````````````````````````````````````````````
 
+    $ git -C /tmp/git-repos-example/hammerlab/ketrew/ checkout -b \
+      new-branch-more-local
 
 
 Now in the multi-status we can see the modified files, the untracked
 counts, and one branch is “ahead” (since we used `-t master` while
 creating, it has a remote to define it):
 
-    $ git multi-status --show-modified --no-config \
+    $ git multi-status --show-all-extras --no-config \
       /tmp/git-repos-example/hammerlab /tmp/git-repos-example/smondet \
       /tmp/git-repos-example/tezos
 
 ````````````````````````````````````````````````````````````````````````ok-output
-    #=== /tmp/git-repos-example/hammerlab:=======================================
-                                             | Untrk | Modf | Ahd | Behd | Umrg |
-    GHub::biokepi............................| 0     | 2    | 0   | 0    | 0    |
+    #=== /tmp/git-repos-example/hammerlab:================================================
+                                             | Untrk | Modf | Ahd | Bhd | Umr | Lcl | L/H |
+    GHub::biokepi............................| 0     | 2    | 0   | 0   | 0   | 0   | 0   |
       |- Modified:
       |    - LICENSE
       |    - README.md
-    GHub::coclobas...........................| 1     | 1    | 0   | 0    | 0    |
+    GHub::coclobas...........................| 1     | 1    | 0   | 0   | 0   | 0   | 0   |
       |- Modified:
       |    - README.md
-    GHub::genspio............................| 0     | 0    | 0   | 0    | 0    |
-    GHub::ketrew.............................| 0     | 0    | 1   | 0    | 0    |
-    #=== /tmp/git-repos-example/smondet:=========================================
-                                             | Untrk | Modf | Ahd | Behd | Umrg |
-    GLab::genspio-doc........................| 0     | 0    | 0   | 0    | 0    |
-    GLab::vecosek............................| 0     | 0    | 0   | 0    | 0    |
-    #=== /tmp/git-repos-example/tezos:===========================================
-                                             | Untrk | Modf | Ahd | Behd | Umrg |
-    GLab::tezos..............................| 0     | 0    | 0   | 0    | 0    |
+    GHub::genspio............................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
+    GHub::ketrew.............................| 0     | 0    | 1   | 0   | 0   | 1   | 0   |
+      |- Ahead: new-branch-that-tracks.
+      |- Local: new-branch-more-local.
+    #=== /tmp/git-repos-example/smondet:==================================================
+                                             | Untrk | Modf | Ahd | Bhd | Umr | Lcl | L/H |
+    GLab::genspio-doc........................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
+    GLab::vecosek............................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
+    #=== /tmp/git-repos-example/tezos:====================================================
+                                             | Untrk | Modf | Ahd | Bhd | Umr | Lcl | L/H |
+    GLab::tezos..............................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
 ````````````````````````````````````````````````````````````````````````
 
 
@@ -793,7 +826,12 @@ Let's concentrate the activity-report on
     Graph:
     
     ````````````````````````````````````````````````````````````````````````````````
-    *  (origin/sm@improve-multigit-display) Update multigit tests
+    *  (origin/sm@improve-multigit-display) Fix both multigit scripts for
+    |   relative paths
+    *  Fix multi-status display on OSX
+    *  Improve `README.md` generation
+    *  Add help-message about multi-status columns
+    *  Update multigit tests
     *  Add option `--fetch` to `git-activity-report`
     *  Improve display of activity-report
     *  Fix README generation
@@ -801,49 +839,13 @@ Let's concentrate the activity-report on
     *  Improve display of the activity report
     *  Fix git alias in multigit documentation
     *  Improve multi-status display
-    *    (HEAD -> master, origin/master, origin/HEAD) Merge `sm@multigit-readme`
-    |\    (PR #99)
-    | *  (origin/sm@multigit-readme) Add blob about limitations of
-    | |   activity-report
-    | *  Fix typo in multi-git README
-    | *  Add example/demo to multi-git's `README.md`
-    | *    Merge `master` into `sm@multigit-readme`
-    | |\  
-    | |/  
-    |/|   
-    * |  Merge `sm@add-activity-report` (PR #98, @smondet)
-    | *  Add an example session
-    | *  Add `README.md` generation for mutli-git
-    |/  
-    *  (origin/sm@add-activity-report) Add more tests of `git-activity-report`
+    *  (HEAD -> master, origin/master, origin/HEAD) Merge `sm@multigit-readme`
+        (PR #99)
     ````````````````````````````````````````````````````````````````````````````````
     
     ##### On `HEAD -> master, origin/master, origin/HEAD`
     
-    - Add more tests of `git-activity-report`.  
-    - Add `README.md` generation for mutli-git.  
-    - Add an example session.  
-    - Merge `sm@add-activity-report` (PR #98, @smondet).  
-    - Merge `master` into `sm@multigit-readme`.  
-    - Add example/demo to multi-git's `README.md`.  
-    - Fix typo in multi-git README.  
-    - Add blob about limitations of activity-report.  
     - Merge `sm@multigit-readme` (PR #99).  
-    
-    ##### On `origin/sm@multigit-readme`
-    
-    - Add more tests of `git-activity-report`.  
-    - Add `README.md` generation for mutli-git.  
-    - Add an example session.  
-    - Merge `sm@add-activity-report` (PR #98, @smondet).  
-    - Merge `master` into `sm@multigit-readme`.  
-    - Add example/demo to multi-git's `README.md`.  
-    - Fix typo in multi-git README.  
-    - Add blob about limitations of activity-report.  
-    
-    ##### On `origin/sm@add-activity-report`
-    
-    - Add more tests of `git-activity-report`.  
     
     #### GHub: ketrew
     
@@ -851,16 +853,17 @@ Let's concentrate the activity-report on
     Working tree:
     
     ````````````````````````````````````````````````````````````````````````````````
-    ## new-branch-for-the-example...master [ahead 1]
+    ## new-branch-more-local
     ````````````````````````````````````````````````````````````````````````````````
     
     Graph:
     
     ````````````````````````````````````````````````````````````````````````````````
-    *  (HEAD -> new-branch-for-the-example) Add greatness to the README
+    *  (HEAD -> new-branch-more-local, new-branch-that-tracks) Add greatness
+        to the README
     ````````````````````````````````````````````````````````````````````````````````
     
-    ##### On `HEAD -> new-branch-for-the-example`
+    ##### On `HEAD -> new-branch-more-local, new-branch-that-tracks`
     
     - Add greatness to the README.  
 ````````````````````````````````````````````````````````````````````````
