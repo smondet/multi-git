@@ -10,6 +10,7 @@ The scripts provided as of now are:
 
 - `git-multi-status`: Show the status of a bunch of Git repositories.
 - `git-activity-report`: Make a report of developments in a bunch of Git repositories.
+- `git-fetch-all`: Call git fetch a bunch of Git repositories.
 
 
 It may be interesting for the user to also alias them in
@@ -66,7 +67,7 @@ Usage: Git-activity-report
 
 Make a report of developments in a bunch of Git repositories.
 
-Use `git activity-report --since 2018-10-23 /path/to/repos1 /path/to/repos2` to display
+Use `git activity-report --since 2018-10-31 /path/to/repos1 /path/to/repos2` to display
 a detailed “recent happenings” report of all the git repositories found
 in the folders `/path/to/repos1` and `/path/to/repos2`.
 
@@ -93,6 +94,29 @@ See also `git-activity-report --help`.
 - Often, there are redundancies between branches that the script does
 not detect.
 
+Usage: Git-fetch-all
+--------------------
+
+Call git fetch a bunch of Git repositories.
+
+Use `git fetch-all /path/to/repos1 /path/to/repos2` to run
+`git fetch --all` in the folders `/path/to/repos1` and `/path/to/repos2`.
+
+Default paths to explore can be set in Git's configuration:
+
+    git config --global --add multi-git.paths /path/to/repos1
+    git config --global --add multi-git.paths /path/to/repos2
+
+
+Options:
+
+* `--no-config`: Do not look at the `multi-git.paths` git-config option.
+* `--version`: Show version information.
+* `--describe`: Call git fetch a bunch of Git repositories
+
+
+See also `git-fetch-all --help`.
+
 
 
 Authors / Making-of
@@ -116,7 +140,7 @@ a set of *“test”* repositories in `/tmp/git-repos-example`:
 
     $ mkdir -p /tmp/git-repos-example/hammerlab
     $ mkdir -p /tmp/git-repos-example/smondet
-    $ mkdir -p /tmp/git-repos-example/tezos
+    $ mkdir -p /tmp/git-repos-example/bitbucket
     $ git clone https://github.com/hammerlab/ketrew.git \
       /tmp/git-repos-example/hammerlab/ketrew
     $ git clone https://github.com/hammerlab/biokepi.git \
@@ -129,8 +153,8 @@ a set of *“test”* repositories in `/tmp/git-repos-example`:
       /tmp/git-repos-example/smondet/genspio-doc
     $ git clone https://gitlab.com/smondet/vecosek.git \
       /tmp/git-repos-example/smondet/vecosek
-    $ git clone https://gitlab.com/tezos/tezos.git \
-      /tmp/git-repos-example/tezos/tezos
+    $ git clone https://bitbucket.org/smondet/nonstd.git \
+      /tmp/git-repos-example/bitbucket/nonstd
 
 
 For now, we haven't changed anything to the repositories so the
@@ -138,7 +162,7 @@ For now, we haven't changed anything to the repositories so the
 get consistent output w.r.t. users' configuration):
 
     $ git multi-status --no-config /tmp/git-repos-example/hammerlab \
-      /tmp/git-repos-example/smondet /tmp/git-repos-example/tezos
+      /tmp/git-repos-example/smondet /tmp/git-repos-example/bitbucket
 
 ````````````````````````````````````````````````````````````````````````ok-output
     #=== /tmp/git-repos-example/hammerlab:================================================
@@ -151,9 +175,9 @@ get consistent output w.r.t. users' configuration):
                                              | Untrk | Modf | Ahd | Bhd | Umr | Lcl | L/H |
     GLab::genspio-doc........................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
     GLab::vecosek............................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
-    #=== /tmp/git-repos-example/tezos:====================================================
+    #=== /tmp/git-repos-example/bitbucket:================================================
                                              | Untrk | Modf | Ahd | Bhd | Umr | Lcl | L/H |
-    GLab::tezos..............................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
+    BBkt::nonstd.............................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
 ````````````````````````````````````````````````````````````````````````
 
 
@@ -161,9 +185,9 @@ get consistent output w.r.t. users' configuration):
 The activity-report is, for now, more interesting, and it outputs
 directly Markdown:
 
-    $ git activity-report --section-base '####' --since 2018-10-20 \
+    $ git activity-report --section-base '####' --since 2018-10-31 \
       --no-config /tmp/git-repos-example/hammerlab \
-      /tmp/git-repos-example/smondet /tmp/git-repos-example/tezos
+      /tmp/git-repos-example/smondet /tmp/git-repos-example/bitbucket
 
 > 
 > #### In `/tmp/git-repos-example/hammerlab`
@@ -180,563 +204,106 @@ directly Markdown:
 > Graph:
 > 
 > ````````````````````````````````````````````````````````````````````````````````
-> *  (origin/sm@improve-multigit-display) Fix both multigit scripts for
-> |   relative paths
+> *  (origin/sm@git-fetch-all) Add the script `git-fetch-all` to `multigit`
+> *  (HEAD -> master, origin/master, origin/HEAD) Merge
+> |   `sm@improve-multigit-display` (PR #100)
+> *  (origin/sm@improve-multigit-display) Get multigit version-string from
+> |   environment
+> *  Improve multigi README
+> *  Add `--show-all-extras` (`git-multi-status`)
+> *  Fix typo in column description
+> *  Fix `Git.wrap_string_hack` (when last is a merge)
+> *  Add option `--show-local`
+> *  Fix display bug (some terminals had trouble)
+> *  Add a really-local-branches column
+> *  Add option `--show-ahead` to `git-multi-status`
+> *  Add the `Lcl` column to the multi-status
+> *  Fix both multigit scripts for relative paths
 > *  Fix multi-status display on OSX
 > *  Improve `README.md` generation
 > *  Add help-message about multi-status columns
 > *  Update multigit tests
-> *  Add option `--fetch` to `git-activity-report`
-> *  Improve display of activity-report
-> *  Fix README generation
-> *  Improve display of multi-status table
-> *  Improve display of the activity report
-> *  Fix git alias in multigit documentation
-> *  Improve multi-status display
-> *    (HEAD -> master, origin/master, origin/HEAD) Merge `sm@multigit-readme`
-> |\    (PR #99)
-> | *  (origin/sm@multigit-readme) Add blob about limitations of
-> | |   activity-report
-> | *  Fix typo in multi-git README
-> | *  Add example/demo to multi-git's `README.md`
-> | *    Merge `master` into `sm@multigit-readme`
-> | |\  
-> | |/  
-> |/|   
-> * |    Merge `sm@add-activity-report` (PR #98, @smondet)
-> |\ \  
-> | | *  Add an example session
-> | | *  Add `README.md` generation for mutli-git
-> | |/  
-> | *  (origin/sm@add-activity-report) Add more tests of `git-activity-report`
-> | *  Improve markdown output of `git-activity-report`
-> | *  Compute default `--since` to “Last Sunday”
-> | *  Add `--section-base` to `git-activity_report`
-> | *    Merge `master` into `sm@add-activity-report`
-> | |\  
-> | |/  
-> |/|   
-> * |    Merge `sm@add-multigit-example` (PR #97)
-> |\ \  
-> | | *  Add new multi-git script: `git-activity-report`
-> | |/  
-> | *  (origin/sm@add-multigit-example) Add support for git-config and improve
-> | |   help
-> | *  Add multigit to the literally documented examples
-> | *  Put descriptive comments in `git-multi-status`
-> | *  Display repository provider (`git multi-status`)
-> | *  Add option `--show-modified` (`git multi-status`)
-> | *  Fix multi-status tests in OSX
-> | *  Put multigit test in separate script
-> | *  Add `multigit` to TravisCI
-> | *  Fix untracked count in `multi_status`
-> | *  Add the “Multi-git” example
-> |/  
-> *  Trigger docker-build only in one travis-job
-> *  Add docker-build trigger in Travis build
-> *  Tweak vm-tester documentation w.r.t Docker images
 > ````````````````````````````````````````````````````````````````````````````````
 > 
 > ###### On `HEAD -> master, origin/master, origin/HEAD`
 > 
-> - Tweak vm-tester documentation w.r.t Docker images.  
-> - Add docker-build trigger in Travis build.  
-> - Trigger docker-build only in one travis-job.  
->   (and fix it).
-> - Add the “Multi-git” example.  
->   For now there is a `git multi-status <paths>` command.
-> - Fix untracked count in `multi_status`.  
-> - Add `multigit` to TravisCI.  
-> - Put multigit test in separate script.  
-> - Fix multi-status tests in OSX.  
-> - Add option `--show-modified` (`git multi-status`).  
-> - Display repository provider (`git multi-status`).  
-> - Put descriptive comments in `git-multi-status`.  
-> - Add multigit to the literally documented examples.  
-> - Add support for git-config and improve help.  
-> - Add new multi-git script: `git-activity-report`.  
->   - This is still work in progress.
-> - The tests do not verify much yet either.
-> - Merge `sm@add-multigit-example` (PR #97).  
-> - Merge `master` into `sm@add-activity-report`.  
-> - Add `--section-base` to `git-activity_report`.  
-> - Compute default `--since` to “Last Sunday”.  
-> - Improve markdown output of `git-activity-report`.  
-> - Add more tests of `git-activity-report`.  
-> - Add `README.md` generation for mutli-git.  
-> - Add an example session.  
-> - Merge `sm@add-activity-report` (PR #98, @smondet).  
-> - Merge `master` into `sm@multigit-readme`.  
-> - Add example/demo to multi-git's `README.md`.  
-> - Fix typo in multi-git README.  
-> - Add blob about limitations of activity-report.  
-> - Merge `sm@multigit-readme` (PR #99).  
+> - Update multigit tests.  
+> - Add help-message about multi-status columns.  
+> - Improve `README.md` generation.  
+> - Fix multi-status display on OSX.  
+> - Fix both multigit scripts for relative paths.  
+> - Add the `Lcl` column to the multi-status.  
+>   This also improves the test, cf. more precise `grep` call.
+> - Add option `--show-ahead` to `git-multi-status`.  
+> - Add a really-local-branches column.  
+> - Fix display bug (some terminals had trouble).  
+> - Add option `--show-local`.  
+> - Fix `Git.wrap_string_hack` (when last is a merge).  
+> - Fix typo in column description.  
+> - Add `--show-all-extras` (`git-multi-status`).  
+> - Improve multigi README.  
+> - Get multigit version-string from environment.  
+> - Merge `sm@improve-multigit-display` (PR #100).  
 > 
-> ###### On `origin/sm@multigit-readme`
+> ###### On `origin/sm@improve-multigit-display`
 > 
-> - Tweak vm-tester documentation w.r.t Docker images.  
-> - Add docker-build trigger in Travis build.  
-> - Trigger docker-build only in one travis-job.  
->   (and fix it).
-> - Add the “Multi-git” example.  
->   For now there is a `git multi-status <paths>` command.
-> - Fix untracked count in `multi_status`.  
-> - Add `multigit` to TravisCI.  
-> - Put multigit test in separate script.  
-> - Fix multi-status tests in OSX.  
-> - Add option `--show-modified` (`git multi-status`).  
-> - Display repository provider (`git multi-status`).  
-> - Put descriptive comments in `git-multi-status`.  
-> - Add multigit to the literally documented examples.  
-> - Add support for git-config and improve help.  
-> - Add new multi-git script: `git-activity-report`.  
->   - This is still work in progress.
-> - The tests do not verify much yet either.
-> - Merge `sm@add-multigit-example` (PR #97).  
-> - Merge `master` into `sm@add-activity-report`.  
-> - Add `--section-base` to `git-activity_report`.  
-> - Compute default `--since` to “Last Sunday”.  
-> - Improve markdown output of `git-activity-report`.  
-> - Add more tests of `git-activity-report`.  
-> - Add `README.md` generation for mutli-git.  
-> - Add an example session.  
-> - Merge `sm@add-activity-report` (PR #98, @smondet).  
-> - Merge `master` into `sm@multigit-readme`.  
-> - Add example/demo to multi-git's `README.md`.  
-> - Fix typo in multi-git README.  
-> - Add blob about limitations of activity-report.  
-> 
-> ###### On `origin/sm@add-activity-report`
-> 
-> - Tweak vm-tester documentation w.r.t Docker images.  
-> - Add docker-build trigger in Travis build.  
-> - Trigger docker-build only in one travis-job.  
->   (and fix it).
-> - Add the “Multi-git” example.  
->   For now there is a `git multi-status <paths>` command.
-> - Fix untracked count in `multi_status`.  
-> - Add `multigit` to TravisCI.  
-> - Put multigit test in separate script.  
-> - Fix multi-status tests in OSX.  
-> - Add option `--show-modified` (`git multi-status`).  
-> - Display repository provider (`git multi-status`).  
-> - Put descriptive comments in `git-multi-status`.  
-> - Add multigit to the literally documented examples.  
-> - Add support for git-config and improve help.  
-> - Add new multi-git script: `git-activity-report`.  
->   - This is still work in progress.
-> - The tests do not verify much yet either.
-> - Merge `sm@add-multigit-example` (PR #97).  
-> - Merge `master` into `sm@add-activity-report`.  
-> - Add `--section-base` to `git-activity_report`.  
-> - Compute default `--since` to “Last Sunday”.  
-> - Improve markdown output of `git-activity-report`.  
-> - Add more tests of `git-activity-report`.  
-> 
-> ###### On `origin/sm@add-multigit-example`
-> 
-> - Tweak vm-tester documentation w.r.t Docker images.  
-> - Add docker-build trigger in Travis build.  
-> - Trigger docker-build only in one travis-job.  
->   (and fix it).
-> - Add the “Multi-git” example.  
->   For now there is a `git multi-status <paths>` command.
-> - Fix untracked count in `multi_status`.  
-> - Add `multigit` to TravisCI.  
-> - Put multigit test in separate script.  
-> - Fix multi-status tests in OSX.  
-> - Add option `--show-modified` (`git multi-status`).  
-> - Display repository provider (`git multi-status`).  
-> - Put descriptive comments in `git-multi-status`.  
-> - Add multigit to the literally documented examples.  
-> - Add support for git-config and improve help.  
+> - Update multigit tests.  
+> - Add help-message about multi-status columns.  
+> - Improve `README.md` generation.  
+> - Fix multi-status display on OSX.  
+> - Fix both multigit scripts for relative paths.  
+> - Add the `Lcl` column to the multi-status.  
+>   This also improves the test, cf. more precise `grep` call.
+> - Add option `--show-ahead` to `git-multi-status`.  
+> - Add a really-local-branches column.  
+> - Fix display bug (some terminals had trouble).  
+> - Add option `--show-local`.  
+> - Fix `Git.wrap_string_hack` (when last is a merge).  
+> - Fix typo in column description.  
+> - Add `--show-all-extras` (`git-multi-status`).  
+> - Improve multigi README.  
+> - Get multigit version-string from environment.  
 > 
 > #### In `/tmp/git-repos-example/smondet`
 > 
-> ##### GLab: genspio-doc
-> 
-> 
-> Working tree:
-> 
-> ````````````````````````````````````````````````````````````````````````````````
-> ## master...origin/master
-> ````````````````````````````````````````````````````````````````````````````````
-> 
-> Graph:
-> 
-> ````````````````````````````````````````````````````````````````````````````````
-> *  (HEAD -> master, origin/master, origin/HEAD) Update `.gitlab-ci.yml`
->     (missing in `fb3bbbd`)
-> ````````````````````````````````````````````````````````````````````````````````
-> 
-> ###### On `HEAD -> master, origin/master, origin/HEAD`
-> 
-> - Update `.gitlab-ci.yml` (missing in `fb3bbbd`).  
-> 
-> #### In `/tmp/git-repos-example/tezos`
-> 
-> ##### GLab: tezos
-> 
-> 
-> Working tree:
-> 
-> ````````````````````````````````````````````````````````````````````````````````
-> ## master...origin/master
-> ````````````````````````````````````````````````````````````````````````````````
-> 
-> Graph:
-> 
-> ````````````````````````````````````````````````````````````````````````````````
-> *  (origin/quyen/test_michelson_types) add test for iter set
-> *  change name of functions test
-> *  failwith
-> *  test_0 added
-> *  todo in control structures
-> *  add comments
-> *  add list map
-> *  solve some TODOs case
-> *  test_2
-> *   nothing
-> *  test on list
-> *  Todo cases
-> *  organise the codes test base on the documentation
-> *  organise the codes test base on the documentation
-> *  add specific operations and organise the codes base on the
-> |   documentation
-> *  nothing
-> *  operations on maps
-> *  test on operations on sets
-> *  (origin/partial_master) Adding prune and delete functions to
-> |   State.Block
-> *  Shell: block_directory of missing hashes raises Not_found
-> *  Shell: Block_directory rpc handles missing blocks
-> *  Shell: Change Chain_traversal.live_blocks type to allow failing
-> | *  (origin/abate/mempool-worker) Mempool: fix indent
-> | *  Mempool: add is_valid function
-> | *  Mempool: add on_request function
-> | *  Mempool: add worker's handlers
-> | *  Mempool: add parse and validate functions
-> | *  Mempool: add global workers
-> |/  
-> | *  (origin/philb/trusted_peers) P2P: enforce min num of
-> | |   trusted_connections
-> | *  P2p: sync doc
-> | *  P2p: extract independent functions from big let rec
-> | *  add obj11/tup11 encoding
-> | | *  (origin/mb/pending_requests) Shell/Distributed_db: try to avoid
-> | | |   requesting peers with pending requests
-> | | *  Shell/Distributed_db: distinguish late pending fulfilled (zombie)
-> | |/    requests from unrequested ones
-> |/|   
-> | | *  (origin/vb/remote-signer-chains) Signer: remove socket on all more
-> | | |   termination signals
-> | | *  Signer: add other remote signers
-> | |/  
-> |/|   
-> | | *  (origin/vb/raft) Signer: remove socket on all more termination signals
-> | | *  Raft: add logging
-> | | *  Raft: WIP
-> | | *  Signer: prepare for Raft consensus signing
-> | | *  Signer: refactoring
-> | |/  
-> |/|   
-> | | *  (origin/quyen/test_michelson) Client: reorg Michelson contracts +
-> | | |   update bash scripts
-> | | *  Client: reorg Michelson test contracts and bash scripts
-> | | |   (mini_scenarios, pt2)
-> | | *  Client: reorg Michelson test contracts and bash scripts (macros, pt2)
-> | | *  Client: reorg Michelson test contracts and bash scripts (opcode, pt2)
-> | | *  Client: reorg Michelson test contracts and bash scripts (attic, pt2)
-> | | *  Tests: reorganise Michelson tests
-> | | *  Tests: split Michelson tests into category attic
-> | | *  Tests: split Michelson tests into category mini_scenarios
-> | | *  Tests: split Michelson tests into category macros
-> | | *  Tests: split Michelson tests into category opcode
-> | |/  
-> |/|   
-> | | *  (origin/reorg_michelson_test_contracts) Client: reorg Michelson
-> | | |   contracts + update bash scripts
-> | | *  Client: reorg Michelson test contracts and bash scripts
-> | | |   (mini_scenarios, pt2)
-> | | *  Client: reorg Michelson test contracts and bash scripts (macros, pt2)
-> | | *  Client: reorg Michelson test contracts and bash scripts (opcode, pt2)
-> | | *  Client: reorg Michelson test contracts and bash scripts (attic, pt2)
-> | | *  Tests: reorganise Michelson tests
-> | | *  Tests: split Michelson tests into category attic
-> | | *  Tests: split Michelson tests into category mini_scenarios
-> | | *  Tests: split Michelson tests into category macros
-> | | *  Tests: split Michelson tests into category opcode
-> | |/  
-> |/|   
-> | | *  (origin/alternative_head_change_heuristic) Shell: less optimistic
-> | | |   heuristic for head change
-> | | *  Shell: export fitness of the current mempool
-> | |/  
-> |/|   
-> | | *  (origin/victor-proto_process) Update structure (WIP)
-> | | *  lib_shell: add fork validator (WIP)
-> | | *  Update machinery to comiple the node_validator
-> | | *  Shell: remove state from apply block arg an reorganize code
-> | | | *  (origin/galfour/benchmark) Benchmark: unify benchmark methods
-> | | | *  Benchmark: use c stub instead of Core's timing function
-> | | | *  Benchmark: hand-made regression benchmarks
-> | | | | *  (origin/plaforgue/p2p_discovery) Documentation and refactoring
-> | | | | *  Local peer discovery
-> | | | | | *  (origin/victor/apply_refacto) Shell/validator: code refactoring to
-> | | | |_|/    allow standalone block validation
-> | | |/| |   
-> | | | | | *  (origin/galfour/benchmark-custom) better benchmarks
-> | | | | | *  packaging
-> | | | | | *  interweaved benchmarks
-> | | | | | *  proof of concept
-> | | | | |/  
-> | | | |/|   
-> | | | * |  Benchmark: cleanup parsing (removes re dependency)
-> | | | * |  Benchmark: fix tests on every bench
-> | | | | | *  (origin/philb/receipt_command) Alpha client: added 'get receipt'
-> | | |_|_|/    command
-> | |/| | |   
-> | | | | | *  (origin/vb/crypto-lock-and-wipe) XXX
-> | | | | | *  [signer backend]: fix lock problem with sk_of_bytes
-> | | | | | *  [signer backend]: use with_wipe_lock_result in decrypt function
-> | | | | | *  [client commands]: wipe and unlock secret_key from
-> | | | | | |   Signature.generate_key
-> | | | | | *  [client commands]: use with_wipe_lock_result for the foundraiser
-> | | | | | |   passphrase
-> | | | | | *  [stdlib]: add blit_list to blit a list of mbytes all at once
-> | | | | | *  Crypto: `m(un)lock` now return a result value
-> | | | | | *  Crypto: remove misleading functions
-> | | | | | *  Crypto: wipe and unlock few more buffers
-> | | | | | *  Crypto: add environment variable to govern mlock
-> | | | | | *  Crypto: lock buffer in `generate_key` functions
-> | | | | | *  Vendors/Uecc: add `unsafe_{sk,pk}_of_bytes`
-> | | | | | *  Vendors/Secp256k1: add `unsafe_read_{sk,pk}`
-> | | | | | *  HACL: fix doc
-> | | | | | *  Signer/Encrypted: use `wipe` and `lock`
-> | | | | | *  Crypto: implement `wipe` and `lock`
-> | | | | | *  Error_monad: add `finalize`
-> | | | | | *  Crypto/HACL: add `wipe` and `lock` primitives
-> | | | | |/  
-> | | | | | *  (origin/mb/distributed_db_delay) Shell/Distributed_db: make initial
-> | |_|_|_|/    request delay depend on resource kind
-> |/| | | |   
-> * | | | |  (HEAD -> master, origin/master, origin/HEAD) doc: add support page
-> | |_|_|/  
-> |/| | |   
-> | | | | *  (origin/galfour/benchmark-landmarks) skepticism
-> | | | |/  
-> | | | *  Affine model for SEQ
-> | | | *  Unwrapped calibration tests
-> | | | *  closure extended
-> | | | *  More log
-> | | | *  Benchmark: disable stabilize_gc flag - too much overhead
-> | | | *  Bench/Proto: export step instead of interp_generic, removes some
-> | | | |   overheads
-> | | | *  Benchmark: prefix calibration benches's result to the other benches
-> | | | |   instead of computing everything again
-> | | | *  Benchmarks: translated old calibration benchs to the new form
-> | | | | *  (origin/julien/Nack-with-list-of-peer_rewritten) lib_p2p: attaching
-> | | | | |   list of points to Nack
-> | | | | *  lib_p2p/p2p_pool: misc debug messages
-> | | | | *  test_p2p_pool: Comments
-> | | | | *  test_p2p_pool: pool parameters as a function of the node position
-> | | | | *  test_p2p_pool: adding one level of debug log
-> | | | | *  test_p2p_pool: introducing overcrowded test,
-> | | | | *  lib_base/p2p_point: adding formatter for list of points
-> | | | | *  lib_base/p2p_connection: Adding event pretty-printer
-> | | | | *  lib_stdlib/option Adding a pretty printer for option types
-> | | | | *  Exporting the `equal` fonction of Point.Id
-> | | | | *  lib_p2p/test Adding comment to explain wait_all behaviour
-> | |_|_|/  
-> |/| | |   
-> | | | | *  (origin/philb/demo_protocol) Update proto_demo
-> | | | | *  CI: update opam-repository branch
-> | | | | *  Shell: remove dead code
-> | |_|_|/  
-> |/| | |   
-> | | | | *  (origin/eztz/signer-deterministic_nonce) signer: added
-> | | | | |   deterministic_nonce
-> | | | | | *  (origin/julien/Nack-with-list-of-peer) p2p: indentation
-> | | | | | *  test_p2p_pool: restauring former tests
-> | | | | | *  lib_p2p: Nack with list of peers
-> | | | | | *  lib_base/p2p_point: adding formatter for list of points
-> | | | | | *  Note: work on Nack wth list
-> | | | | | *  lib_p2p/p2p_pool: misc debug messages
-> | | | | | *  lib_p2p/test/test_p2p_pool: remove message sending from the client
-> | | | | | *  lib_p2p/test/test_p2p_pool: white spaces preventing test success
-> | | | | | *  lib_p2p test_p2p_pool: pool parameters as a function of the node
-> | | | | | |   position
-> | | | | | *  lib_base/p2p_connection: Adding event pretty-printer
-> | | | | | *  lib_p2p/test Adding a test for the "kick with list of pairs"
-> | | | | | |   functionality
-> | | | | | *  lib_stdlib/option Adding a pretty printer for option types
-> | | | | | *  lib_p2p/test/process Adding wait_almost_all
-> | | | | | *  lib_p2p/test Adding comment to explain wait_all behaviour
-> | | | | | *  Exporting the `equal` fonction of Point.Id
-> | | | | | *  Note: Todos
-> | | | | | *  Note: reorganisation and complement
-> | | | | | *  Note: connection description
-> | | | | | *  Personnal documentation file to follow the flow of incomming
-> | |_|_|_|/    connections
-> |/| | | |   
-> | | | | | *  (origin/abate/prevalidator-rpc-functor) Prevalidator: add RPC error in
-> | | | | | |   case of unknown protocol
-> | | | | | *  Prevalidation: remove now useless protocol_data encoding/decoding
-> | | | | | *  Prevalidation: remove lazy computation for rpc directory
-> | | | | |/  
-> | | | | | *  (origin/abate/error_monad_docstring) Error Monad: add docstring to
-> | | | | |/    register_error_kind
-> | | | | | *  (origin/identity_backward_compat) bin_node: sanity check on node
-> | | | | | |   identity file
-> | | | | | *  lib_crypto:  Adding pretty printer for public keys
-> | | | | | *  lib_crypto: export neuterize and public_key equality
-> | | | | | *  Fix bc37fde73eb4a1df3783822256433881e1c0bf59 : Restore compatibily with
-> | |_|_|_|/    (old) identity.json that does not contain a `peer_id`
-> |/| | | |   
-> | | | | | *  (origin/michelson_test_contracts) Client: sort Michelson test contracts
-> | |_|_|_|/  
-> |/| | | |   
-> * | | | |  Stdlib/Ring: fix ring's semantics
-> | | | | | *  (origin/galfour/benchmark-dirty) dirty test
-> | | | | |/  
-> | | | |/|   
-> | | | * |  added constant run overhead
-> | | | * |  add calibration to tests
-> | | | * |  Benchmark: unify the workflow in executable
-> | | | * |  Benchmark: fix indent
-> | | | * |  write_lp: addition fix
-> | | | * |  Benchmark: reworked directory hierarchy
-> | | | * |  empty trace case added
-> | | | * |  wtf
-> | | | * |  generic benchmarks
-> | | | * |  indentation
-> | | | * |  Generic interp
-> | | | * |  TMP:start clean-up
-> | | | * |  Bench: moved cp to run.sh
-> | | | * |  cleaning
-> | | | * |  Packaging
-> | | | * |  better benchmarks
-> | | | * |  all weights, bugfixes, minor improvements
-> | | | * |  it works
-> | | | * |  save
-> | | | * |  refactoring
-> | | | * |  refactoring
-> | | | * |  last basic contract, start refactoring and debugging
-> | | | * |  save
-> | | | * |  save
-> | | | * |  bug
-> | | | * |  benchmark for force_decode
-> | | | * |  folder architecture
-> | | | |/  
-> | | | | *  (origin/plaforgue/annotation_assert) Add annotations for inspecting
-> | | | | |   values with ASSERT_SOME, ASSERT_LEFT, ASSERT_RIGHT
-> | | | | *  Alpha, client: unexpand macros when displaying scripts
-> | |_|_|/  
-> |/| | |   
-> * | | |  Signer: add `handler.mli`
-> * | | |  Micheline: fix printer for code that exceeds 80 columns
-> | |_|/  
-> |/| |   
-> | | | *  (origin/state_migration) Shell: fix minor typo in error name
-> | | | *  Shell: fix indentation
-> | | | *  Shell: use "atomic" upgrade of disk storage
-> | | | *  Shell: add missing disk upgrade
-> | | | *  Shell: store the full block header of the checkpoint
-> | | | *  Node: prepare for storage upgrades
-> | | | *  Shell: use private type for `State.Block.Header.t`
-> | | | *  Shell/RPC: export a Base58Check representation of block headers
-> | |_|/  
-> |/| |   
-> | | | *  (origin/abate/prevalidator-preapply-refactor) Prevalidator:
-> | | | |   advertisement -> pending_advertisement
-> | | | *  Prevalidator: add a couple of comments in the code
-> | | | *  Prevalidator: refactor preapply
-> | | | *  Prevalidator: clarify OutdatedOrNotInBranch
-> | | | *  Prevalidator: remove live_block and live_operations from prevalidator
-> | | | |   state
-> | | | *  Prevalidator: use prevalidation live_block in already_handled
-> | | | *  Prevalidation: add two new accessor for live_blocks and live_operations
-> | | | *  Prevalidators: already_handled now returns a tzresult
-> | | | *  Prevalidators: remove polymorphic variant from advertisement
-> | | | *  Prevalidation: Explain Duplicated, Outdated and Alien operation results
-> | | | *  Prevalidation: add parse_list to parse a list of operations
-> | | | *  Prevalidation: minor preapply refactor
-> | | | *  Prevalidator: Remove mempool from the worker state
-> | |_|/  
-> |/| |   
-> * | |  Shell/Peer_metadata: change counters to aribtrary precision integers
-> * | |  RPC: minor changes and add genesis+N
-> * | |  RPC: add a hash+N and a hash-N notations
-> * | |  RPC: add a way to access a given block using its level
-> * | |  Shell: fix notification of new operations in the mempool
-> | |/  
-> |/|   
-> * |  Shell: first batch of statistics in the DistributedDB
-> * |  Shell: Extract the block-application function into a separate module
-> |/  
-> | *  (origin/quick-mempool-fix) Stdlib/Ring: fix ring's semantics
-> | *  Mempool: quick limits fix
-> | *  (origin/julien/kick-wth-lst-of-peer) lib_p2p/test Adding a test for the
-> | |   "kick with list of pairs" functionality
-> | *  lib_stdlib/option Adding a pretty printer for option types
-> | *  lib_p2p/test/process Adding wait_almost_all
-> | *  lib_p2p/test Adding comment to explain wait_all behaviour
-> | *  Exporting the `equal` fonction of Point.Id
-> | *  Politely rejecting connections by sending the list of known points.
-> | *  (origin/alphanet) Merge remote-tracking branch 'origin/mainnet-staging'
-> | |   into alphanet
-> | *  (origin/pirbo/mainnet, origin/mainnet-staging) Merge commit
-> |     'e9668843816af0b61906b2bcdd97cea88072625b' into mainnet-staging
-> | *  (origin/galfour/benchmark-wtf) wtf
-> | *  generic benchmarks
-> | *    Merge branch 'galfour/benchmark' of gitlab.com:tezos/tezos into
-> | |\    galfour/benchmark
-> | | *  TMP:start clean-up
-> | * |  indentation
-> | * |  Generic interp
-> | |/  
-> | *  Bench: moved cp to run.sh
-> | *  cleaning
-> | *  Packaging
-> | *  better benchmarks
-> | *  all weights, bugfixes, minor improvements
-> | *  it works
-> | *  save
-> | *  refactoring
-> | *  refactoring
-> | *  last basic contract, start refactoring and debugging
-> | *  save
-> | *  save
-> | *  bug
-> | *  benchmark for force_decode
-> | *  folder architecture
-> |/  
-> | *  (origin/raphael/prototype-batch-scheduler) PROTOTYPE: batch scheduler
-> |/  
-> *  Shell: simplify the signature of `Prevalidation`
-> *  Target only USB ledger with interface number 0
-> ````````````````````````````````````````````````````````````````````````````````
-> 
-> ###### On `HEAD -> master, origin/master, origin/HEAD`
-> 
-> - Target only USB ledger with interface number 0.  
-> - Shell: simplify the signature of `Prevalidation`.  
->   Co-authored-by: Raphaël Proust <code@bnwr.net>
-> Co-authored-by: Pietro Abate <pietro.abate@tezcore.com>
-> Co-authored-by: Grégoire Henry <gregoire@tezcore.com>
-> - Shell: Extract the block-application function into a separate module.  
-> - Shell: first batch of statistics in the DistributedDB.  
->   Co-authored-by: Pietro Abate <pietro.abate@tezcore.com>
-> Co-authored-by: Mathias Bourgoin <mathias.bourgoin@tezcore.com>
-> - Shell: fix notification of new operations in the mempool.  
-> - RPC: add a way to access a given block using its level.  
-> - RPC: add a hash+N and a hash-N notations.  
-> - RPC: minor changes and add genesis+N.  
-> - Shell/Peer_metadata: change counters to aribtrary precision integers.  
-> - Micheline: fix printer for code that exceeds 80 columns.  
-> - Signer: add `handler.mli`.  
-> - Stdlib/Ring: fix ring's semantics.  
-> - doc: add support page.  
+> #### In `/tmp/git-repos-example/bitbucket`
+
+
+The script `git-fetch-all` is the simplest it just provides a nice
+display even when working with ≥ 30 repositories, and with **errors**,
+so we are going to add a couple of wrong remotes to spice things up.
+
+    $ git -C /tmp/git-repos-example/hammerlab/ketrew remote add wrong-http \
+      https://example.com/dadams/h2g2.git
+    $ git -C /tmp/git-repos-example/smondet/vecosek remote add wrong-ssh \
+      git@gitlab.com/i-don-t-have-access/to-this.git
+
+
+And *now,* we call `git-fetch-all`:
+
+    $ git fetch-all --no-config /tmp/git-repos-example/hammerlab \
+      /tmp/git-repos-example/smondet /tmp/git-repos-example/bitbucket
+
+````````````````````````````````````````````````````````````````````````ok-output
+    >> Repository biokepi: [origin: OK]
+    >> Repository coclobas: [origin: OK]
+    >> Repository genspio: [origin: OK]
+    >> Repository ketrew: [origin: OK][wrong-http: ERROR]
+    >> Repository genspio-doc: [origin: OK]
+    >> Repository vecosek: [origin: OK][wrong-ssh: ERROR]
+    >> Repository nonstd: [origin: OK]
+    
+    ## Errors:
+    * Repository `ketrew`, remote `wrong-http`:
+        * > fatal: repository 'https://example.com/dadams/h2g2.git/' not found
+        * See also `/tmp/multi-fetch-ketrew-wrong-http.log`.
+    * Repository `vecosek`, remote `wrong-ssh`:
+        * > 
+        * > Please make sure you have the correct access rights
+        * > and the repository exists.
+        * See also `/tmp/multi-fetch-vecosek-wrong-ssh.log`.
+````````````````````````````````````````````````````````````````````````
+
 
 
 Let's do some modifications:
@@ -763,7 +330,7 @@ Let's do some modifications:
       greatness to the README'
 
 ````````````````````````````````````````````````````````````````````````ok-output
-    [new-branch-that-tracks 25f2c47] Add greatness to the README
+    [new-branch-that-tracks c975d9b] Add greatness to the README
      1 file changed, 1 insertion(+)
 ````````````````````````````````````````````````````````````````````````
 
@@ -777,7 +344,7 @@ creating, it has a remote to define it):
 
     $ git multi-status --show-all-extras --no-config \
       /tmp/git-repos-example/hammerlab /tmp/git-repos-example/smondet \
-      /tmp/git-repos-example/tezos
+      /tmp/git-repos-example/bitbucket
 
 ````````````````````````````````````````````````````````````````````````ok-output
     #=== /tmp/git-repos-example/hammerlab:================================================
@@ -797,9 +364,9 @@ creating, it has a remote to define it):
                                              | Untrk | Modf | Ahd | Bhd | Umr | Lcl | L/H |
     GLab::genspio-doc........................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
     GLab::vecosek............................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
-    #=== /tmp/git-repos-example/tezos:====================================================
+    #=== /tmp/git-repos-example/bitbucket:================================================
                                              | Untrk | Modf | Ahd | Bhd | Umr | Lcl | L/H |
-    GLab::tezos..............................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
+    BBkt::nonstd.............................| 0     | 0    | 0   | 0   | 0   | 0   | 0   |
 ````````````````````````````````````````````````````````````````````````
 
 
@@ -826,26 +393,14 @@ Let's concentrate the activity-report on
     Graph:
     
     ````````````````````````````````````````````````````````````````````````````````
-    *  (origin/sm@improve-multigit-display) Fix both multigit scripts for
-    |   relative paths
-    *  Fix multi-status display on OSX
-    *  Improve `README.md` generation
-    *  Add help-message about multi-status columns
-    *  Update multigit tests
-    *  Add option `--fetch` to `git-activity-report`
-    *  Improve display of activity-report
-    *  Fix README generation
-    *  Improve display of multi-status table
-    *  Improve display of the activity report
-    *  Fix git alias in multigit documentation
-    *  Improve multi-status display
-    *  (HEAD -> master, origin/master, origin/HEAD) Merge `sm@multigit-readme`
-        (PR #99)
+    *  (origin/sm@git-fetch-all) Add the script `git-fetch-all` to `multigit`
+    *  (HEAD -> master, origin/master, origin/HEAD) Merge
+        `sm@improve-multigit-display` (PR #100)
     ````````````````````````````````````````````````````````````````````````````````
     
     ##### On `HEAD -> master, origin/master, origin/HEAD`
     
-    - Merge `sm@multigit-readme` (PR #99).  
+    - Merge `sm@improve-multigit-display` (PR #100).  
     
     #### GHub: ketrew
     
