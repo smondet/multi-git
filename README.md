@@ -204,7 +204,11 @@ directly Markdown:
 > Graph:
 > 
 > ````````````````````````````````````````````````````````````````````````````````
-> *  (origin/sm@git-fetch-all) Add the script `git-fetch-all` to `multigit`
+> *  (origin/sm@git-fetch-all) Qualify known remotes (`git-fetch-all`)
+> *  Display `No remotes` when there are no remotes
+> *  Improve the multigit README
+> *  Improve display of `git-fetch-all`
+> *  Add the script `git-fetch-all` to `multigit`
 > *  (HEAD -> master, origin/master, origin/HEAD) Merge
 > |   `sm@improve-multigit-display` (PR #100)
 > *  (origin/sm@improve-multigit-display) Get multigit version-string from
@@ -285,13 +289,13 @@ And *now,* we call `git-fetch-all`:
       /tmp/git-repos-example/smondet /tmp/git-repos-example/bitbucket
 
 ````````````````````````````````````````````````````````````````````````ok-output
-    >> Repository biokepi: [origin: OK]
-    >> Repository coclobas: [origin: OK]
-    >> Repository genspio: [origin: OK]
-    >> Repository ketrew: [origin: OK][wrong-http: ERROR]
-    >> Repository genspio-doc: [origin: OK]
-    >> Repository vecosek: [origin: OK][wrong-ssh: ERROR]
-    >> Repository nonstd: [origin: OK]
+    >> Repository biokepi: [GHub:origin OK]
+    >> Repository coclobas: [GHub:origin OK]
+    >> Repository genspio: [GHub:origin OK]
+    >> Repository ketrew: [GHub:origin OK][Unkn:wrong-http ERROR]
+    >> Repository genspio-doc: [GLab:origin OK]
+    >> Repository vecosek: [GLab:origin OK][GLab:wrong-ssh ERROR]
+    >> Repository nonstd: [BBkt:origin OK]
     
     ## Errors:
     * Repository `ketrew`, remote `wrong-http`:
@@ -330,7 +334,7 @@ Let's do some modifications:
       greatness to the README'
 
 ````````````````````````````````````````````````````````````````````````ok-output
-    [new-branch-that-tracks c975d9b] Add greatness to the README
+    [new-branch-that-tracks 801f28d] Add greatness to the README
      1 file changed, 1 insertion(+)
 ````````````````````````````````````````````````````````````````````````
 
@@ -393,7 +397,11 @@ Let's concentrate the activity-report on
     Graph:
     
     ````````````````````````````````````````````````````````````````````````````````
-    *  (origin/sm@git-fetch-all) Add the script `git-fetch-all` to `multigit`
+    *  (origin/sm@git-fetch-all) Qualify known remotes (`git-fetch-all`)
+    *  Display `No remotes` when there are no remotes
+    *  Improve the multigit README
+    *  Improve display of `git-fetch-all`
+    *  Add the script `git-fetch-all` to `multigit`
     *  (HEAD -> master, origin/master, origin/HEAD) Merge
         `sm@improve-multigit-display` (PR #100)
     ````````````````````````````````````````````````````````````````````````````````
